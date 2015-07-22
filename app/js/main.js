@@ -1,12 +1,34 @@
 require('angular/angular');
-require('angular-route/angular-route');
-require('angular-css');
+require('angular-route/angular-route'); //ngRoute
+require('angular-css'); // door3.css
+require('angular-material'); // ngMaterial
 
-// door3.css is from angular-css (adding style 'css' per route)
 var requires = [
     'ngRoute',
-    'door3.css'
+    'door3.css',
+    'ngMaterial'
 ];
 
+var app = angular.module('app', requires).config(['$routeProvider', require('./routes')]);
+
+// top menu
+app.controller('TopMenuController', ['$scope', '$mdSidenav', '$mdUtil', function ($scope, $mdSidenav, $mdUtil) {
+    $scope.toggleLeftNav = buildToggler();
+    function buildToggler() {
+        return $mdUtil.debounce(function () {
+            $mdSidenav('left').toggle();
+        }, 50);
+    }
+}]);
+
+// left nav menu
+app.controller('LeftNavController', ['$scope', '$location', '$mdSidenav', '$mdUtil', function ($scope, $location, $mdSidenav, $mdUtil) {
+    $scope.navigateTo = function (to) {
+        $location.path(to);
+        $mdSidenav('left').toggle();
+    };
+}]);
+
 // mount on window for testing
-window.app = angular.module('app', requires).config(['$routeProvider', require('./routes')]);
+window.app = app;
+
