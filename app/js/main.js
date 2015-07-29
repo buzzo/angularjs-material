@@ -12,13 +12,16 @@ var requires = [
 var app = angular.module('app', requires).config(['$routeProvider', require('./routes')]);
 
 // top menu
-app.controller('TopMenuController', ['$scope', '$mdSidenav', '$mdUtil', function ($scope, $mdSidenav, $mdUtil) {
+app.controller('TopMenuController', ['$scope', '$location', '$mdSidenav', '$mdUtil', function ($scope, $location, $mdSidenav, $mdUtil) {
     $scope.toggleLeftNav = buildToggler();
     function buildToggler() {
         return $mdUtil.debounce(function () {
             $mdSidenav('left').toggle();
         }, 50);
     }
+    $scope.navigateTo = function (to) {
+        $location.path(to);
+    };
 }]);
 
 // left nav menu

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function ($scope) {
-    $scope.title = 'Security';
+    $scope.title = 'Account';
 
     var columnDefs = [
         {headerName: "Make", field: "make"},

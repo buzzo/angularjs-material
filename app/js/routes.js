@@ -9,10 +9,10 @@ module.exports = function ($routeProvider) {
             template: fs.readFileSync(__dirname + '/modules/dashboard/dashboard.html'),
             css: require('./modules/dashboard/dashboard.css')
         })
-        .when('/security', {
-            controller: ['$scope', require('./modules/security/security.js')],
-            template: fs.readFileSync(__dirname + '/modules/security/security.html'),
-            css: require('./modules/security/security.css')
+        .when('/account', {
+            controller: ['$scope', require('./modules/account/account.js')],
+            template: fs.readFileSync(__dirname + '/modules/account/account.html'),
+            css: require('./modules/account/account.css')
         })
         .otherwise({
             redirectTo: '/dashboard'

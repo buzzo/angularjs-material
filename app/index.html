@@ -22,9 +22,6 @@
                         Dashboard
                     </md-list-item>
                     <md-divider></md-divider>
-                    <md-list-item ng-click="navigateTo('security')">
-                        Security
-                    </md-list-item>
                 </md-list>
             </div>
         </md-sidenav>
@@ -39,8 +36,8 @@
                     <md-button class="md-icon-button" aria-label="User Settings" ng-click="$mdOpenMenu()">
                         <md-icon md-menu-origin class="material-icons">settings</md-icon>
                     </md-button>
-                    <md-menu-content >
-                        <md-menu-item>
+                    <md-menu-content>
+                        <md-menu-item ng-click="navigateTo('account')">
                             <md-button>
                                 <md-icon md-menu-origin class="material-icons">perm_identity</md-icon>
                                 My Account
