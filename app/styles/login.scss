@@ -1,0 +1,38 @@
+$login-width: 350px;
+$account-circle-size: 96px;
+
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: $login-width;
+  border: 1px solid #eeeeee;
+  padding: 30px;
+  background-color: #f9f9f9;
+}
+
+.login-account-circle {
+  height: $account-circle-size;
+  width: $account-circle-size;
+  font-size: $account-circle-size;
+  padding-bottom: 20px;
+}
+
+// required input make icon red
+.login md-input-container.md-input-invalid > md-icon.username,
+.login md-input-container.md-input-invalid > md-icon.password {
+  color: red;
+}
+

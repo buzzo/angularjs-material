@@ -29,9 +29,9 @@ module.exports = {
   'views': {
     'watch': [
       'app/index.html',
-      'app/views/**/*.html'
+      'app/login.html'
     ],
-    'src': 'app/views/**/*.html',
+    'src': 'app/*.html',
     'dest': 'app/js'
   },
 
@@ -46,9 +46,16 @@ module.exports = {
   },
 
   'browserify': {
-    'entries'   : ['./app/js/main.js'],
-    'bundleName': 'main.js',
-    'sourcemap' : true
+    'main': {
+      'entries': ['./app/js/main.js'],
+      'bundleName': 'main.js',
+      'sourcemap': true
+    },
+    'login' : {
+      'entries': ['./app/js/login.js'],
+      'bundleName': 'login.js',
+      'sourcemap': true
+    }
   },
 
   'test': {
