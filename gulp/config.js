@@ -2,65 +2,65 @@
 
 module.exports = {
 
-  'browserPort'  : 3000,
-  'UIPort'       : 3001,
-  'serverPort'   : 3002,
+    'browserPort': 3000,
+    'UIPort': 3001,
+    'serverPort': 3002,
 
-  'styles': {
-    'src' : 'app/styles/**/*.scss',
-    'dest': 'build/css'
-  },
-
-  'scripts': {
-    'src' : 'app/js/**/*.js',
-    'dest': 'build/js'
-  },
-
-  'images': {
-    'src' : 'app/images/**/*',
-    'dest': 'build/images'
-  },
-
-  'fonts': {
-    'src' : ['app/fonts/**/*'],
-    'dest': 'build/fonts'
-  },
-
-  'views': {
-    'watch': [
-      'app/index.html',
-      'app/login.html'
-    ],
-    'src': 'app/*.html',
-    'dest': 'app/js'
-  },
-
-  'gzip': {
-    'src': 'build/**/*.{html,xml,json,css,js,js.map}',
-    'dest': 'build/',
-    'options': {}
-  },
-
-  'dist': {
-    'root'  : 'build'
-  },
-
-  'browserify': {
-    'main': {
-      'entries': ['./app/js/main.js'],
-      'bundleName': 'main.js',
-      'sourcemap': true
+    'styles': {
+        'src': 'app/styles/**/*.scss',
+        'dest': 'build/css'
     },
-    'login' : {
-      'entries': ['./app/js/login.js'],
-      'bundleName': 'login.js',
-      'sourcemap': true
-    }
-  },
 
-  'test': {
-    'karma': 'test/karma.conf.js',
-    'protractor': 'test/protractor.conf.js'
-  }
+    'scripts': {
+        'src': 'app/js/**/*.js',
+        'dest': 'build/js'
+    },
+
+    'images': {
+        'src': 'app/images/**/*',
+        'dest': 'build/images'
+    },
+
+    'fonts': {
+        'src': ['app/fonts/**/*'],
+        'dest': 'build/fonts'
+    },
+
+    'views': {
+        'watch': [
+            'app/index.html',
+            'app/login.html'
+        ],
+        'src': 'app/*.html',
+        'dest': 'app/js'
+    },
+
+    'gzip': {
+        'src': 'build/**/*.{html,xml,json,css,js,js.map}',
+        'dest': 'build/',
+        'options': {}
+    },
+
+    'dist': {
+        'root': 'build'
+    },
+
+    'browserify': {
+        'main': {
+            'entries': ['./app/js/main.js'],
+            'bundleName': 'main.js',
+            'sourcemap': true
+        },
+        'login': {
+            'entries': ['./app/js/login.js'],
+            'bundleName': 'login.js',
+            'sourcemap': true
+        }
+    },
+
+    'test': {
+        'karma': 'test/karma.conf.js',
+        'protractor': 'test/protractor.conf.js'
+    }
 
 };

@@ -1,4 +1,6 @@
-require('angular/angular');
+'use strict';
+
+var angular = require('angular');
 require('angular-route/angular-route'); //ngRoute
 require('angular-css'); // door3.css
 require('angular-material'); // ngMaterial
