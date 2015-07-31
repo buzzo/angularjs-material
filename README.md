@@ -10,9 +10,10 @@ Goal:
 - using material as UI
 
 TODO:
-- research + add security (login, etc)
 - add CRUD example
-- move from css to sass
+- research + add security (login, logout)
+- improve login screen
+- i18n
 
 ### Commands
 
