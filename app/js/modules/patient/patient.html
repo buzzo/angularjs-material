@@ -5,12 +5,11 @@
 </md-toolbar>
 <md-content style="height: 500px;" md-scroll-shrink>
     <md-list>
-        <md-list-item class="md-3-line" ng-repeat="person in people" ng-click="goToPerson(person.name, $event)">
+        <md-list-item class="md-3-line" ng-repeat="entity in entities" ng-click="showDetails(entity, $event)">
             <div class="md-list-item-text">
-                <h3>{{ person.name }}</h3>
-                <h4>Tel: {{ person.tel }}</h4>
-
-                <p>Notes: {{ person.notes }}</p>
+                <h3>{{ entity.name }}</h3>
+                <h4>Tel: {{ entity.tel }}</h4>
+                <p>Notes: {{ entity.notes }}</p>
             </div>
             <md-divider inset ng-if="!$last"></md-divider>
         </md-list-item>

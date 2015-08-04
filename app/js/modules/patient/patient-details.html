@@ -1,0 +1,54 @@
+<md-dialog flex="66">
+    <form name="patientForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Patient Details</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Name (required)</label>
+                    <input name="patientName" ng-model="entity.name" ng-disabled="disabled" ng-required="true">
+                </md-input-container>
+            </div>
+            <div layout layout-sm="column">
+                <md-input-container flex="50">
+                    <label>Telephone number</label>
+                    <input type="tel" ng-model="entity.tel" ng-disabled="disabled">
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>Birthday</label>
+                    <input type="date" ng-model="entity.birthday" ng-disabled="disabled">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+
+        <div class="md-actions" layout="row">
+            <!--remove icon-->
+            <div layout="row" layout-align="start">
+                <md-button class=" delete-icon md-icon-button" aria-label="Delete">
+                    <md-icon class="material-icons">delete</md-icon>
+                </md-button>
+            </div>
+            <div flex></div>
+            <div layout="row" layout-align="end">
+                <!--shows when editing-->
+                <md-button ng-show="!disabled" ng-click="save();toggleEditDetails();" class="md-raised md-primary">
+                    Save
+                </md-button>
+                <md-button ng-show="!disabled" ng-click="clean();toggleEditDetails();" class="md-warn">
+                    Cancel
+                </md-button>
+                <!--shows when NOT editing-->
+                <md-button ng-show="disabled" ng-click="toggleEditDetails()" class="md-raised md-primary">
+                    Edit
+                </md-button>
+                <md-button ng-show="disabled" ng-click="close('close')" class="md-raised">
+                    Close
+                </md-button>
+            </div>
+        </div>
+    </form>
+</md-dialog>
