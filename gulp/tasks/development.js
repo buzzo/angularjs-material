@@ -5,8 +5,7 @@ var runSequence = require('run-sequence');
 
 gulp.task('dev', ['clean'], function (cb) {
 
-    cb = cb || function () {
-        };
+    cb = cb || function () {};
 
     global.isProd = false;
 

@@ -55,6 +55,11 @@ module.exports = {
             'entries': ['./app/js/login.js'],
             'bundleName': 'login.js',
             'sourcemap': true
+        },
+        'main_mock': {
+            'entries': ['./test/mock/main_mock.js'],
+            'bundleName': 'main.js',
+            'sourcemap': true
         }
     },
 
