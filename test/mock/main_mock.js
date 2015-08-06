@@ -59,25 +59,29 @@ angular.module('app-mock', requires).run(function ($httpBackend) {
         }
     });
 
-    $httpBackend.whenDELETE(/^\/services\/patients\/\d+$/).respond(function (method, url, data) {
-        var patient = angular.fromJson(data);
-        // search
-        var result = patients.filter(function (pat) {
-            return pat.id === patient.id;
-        });
-        if (result.length > 0) {
-            // found!
-            // remove
-            patients = patients.filter(function (pat) {
-                return pat.id !== patient.id;
-            });
-            return [200, patient, {}];
+    $httpBackend.whenDELETE(/^\/services\/patients\/\d+$/).respond(function (method, url) {
+        var idRegex = /\/(\d+)/;
+        var match = idRegex.exec(url);
+        if (match == null) {
+            return [400, {}, {}];
         } else {
-            // didn't find the patient
-            return [400, patient, {}];
+            var id = match[1];
+            // search
+            var result = patients.filter(function (pat) {
+                return pat.id == id;
+            });
+            if (result.length > 0) {
+                // found!
+                // remove
+                patients = patients.filter(function (pat) {
+                    return pat.id != id;
+                });
+                return [200, {}, {}];
+            } else {
+                return [400, {}, {}];
+            }
         }
     });
-
 
 }).config(function ($provide) {
     // controlled a delay

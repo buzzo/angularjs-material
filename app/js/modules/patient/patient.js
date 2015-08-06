@@ -63,8 +63,8 @@ module.exports = function ($scope, $mdDialog, Patient) {
     }
 
     function _delete(entity) {
-        Patient.delete({id: entity.id}, entity, function () {
-            console.log('delete');
+        Patient.delete({id: entity.id}, function () {
+            // TODO TOAST!
         });
     }
 };
