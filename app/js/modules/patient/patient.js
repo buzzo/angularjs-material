@@ -3,24 +3,15 @@
 var fs = require('fs');
 var angular = require('angular');
 
-module.exports = function ($scope, $mdDialog) {
+module.exports = function ($scope, $mdDialog, Patient) {
 
-    // TODO LOAD
-    $scope.entities = [
-        {name: 'Janet Perkins', tel: '1112212', birthday: new Date(1995, 11, 17), notes: 'Next appointment: 12th Dec'},
-        {name: 'Mary Johnson', tel: '4545454', birthday: new Date(2005, 12, 17), notes: ''},
-        {name: 'Peter Carlsson', tel: '658789', birthday: new Date(1988, 1, 7), notes: ''},
-        {name: 'Margaret D.', tel: '9988676', birthday: new Date(1999, 3, 3), notes: ''},
-        {name: 'Rubens Hojj', tel: '+55112443', birthday: new Date(1999, 1, 9), notes: ''},
-        {name: 'Yum Kin', tel: '', notes: ''},
-        {name: 'Walter N. Buzz', tel: '7674323', birthday: new Date(1955, 4, 18), notes: 'Never on time'}
-    ];
+    _load();
 
-    $scope.showDetails = function (person, $event) {
+    $scope.showDetails = function (entity, $event) {
 
         var details = {
             controller: function DialogController($scope, $mdDialog) {
-                $scope.entity = angular.copy(person);
+                $scope.entity = angular.copy(entity);
 
                 $scope.disabled = true;
 
@@ -29,30 +20,41 @@ module.exports = function ($scope, $mdDialog) {
                 };
 
                 $scope.clean = function () {
-                    $scope.entity = angular.copy(person);
+                    $scope.entity = angular.copy(entity);
                 };
 
                 $scope.save = function () {
-                    // TODO TOAST!
-                    person = angular.copy($scope.entity);
+                    _update($scope.entity);
                 };
 
                 $scope.close = function (answer) {
                     $mdDialog.hide(answer);
                 };
             },
-            template: fs.readFileSync(__dirname + '/patient-details.html'),
+            template: fs.readFileSync(__dirname + '/patient.details.html'),
             targetEvent: $event
         };
 
-        // TODO FIX
         $mdDialog.show(details)
-            .then(function (answer) {
-                $scope.alert = 'SAVE TOAST' + answer;
+            .then(function () {
+                _load();
             }, function () {
-                $scope.alert = 'CANCEL!!';
+                _load();
             });
     };
 
+    function _load() {
+        $scope.isLoading = true;
+        $scope.entities = Patient.query(function () {
+            $scope.isLoading = false;
+        });
+    }
 
+    function _update(entity) {
+        $scope.isUpdating = true;
+        Patient.update({id: entity.id}, entity, function () {
+            // TODO TOAST!
+            $scope.isUpdating = false;
+        });
+    }
 };

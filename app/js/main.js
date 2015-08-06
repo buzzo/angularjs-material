@@ -4,11 +4,13 @@ var angular = require('angular');
 require('angular-route/angular-route'); //ngRoute
 require('angular-css'); // door3.css
 require('angular-material'); // ngMaterial
+require('angular-resource'); // ngResource
 
 var requires = [
     'ngRoute',
     'door3.css',
-    'ngMaterial'
+    'ngMaterial',
+    'ngResource'
 ];
 
 var app = angular.module('app', requires).config(['$routeProvider', require('./routes')]);
@@ -18,4 +20,3 @@ app.controller('LeftMenuController', ['$scope', '$location', '$mdSidenav', '$mdU
 
 // mount on window for testing
 window.app = app;
-

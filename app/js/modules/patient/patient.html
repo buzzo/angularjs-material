@@ -4,8 +4,12 @@
     </h2>
 </md-toolbar>
 <md-content style="height: 500px;" md-scroll-shrink>
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="isLoading">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
     <md-list>
-        <md-list-item class="md-3-line" ng-repeat="entity in entities" ng-click="showDetails(entity, $event)">
+        <md-list-item class="md-3-line" ng-show="!isLoading" ng-repeat="entity in entities"
+                      ng-click="showDetails(entity, $event)">
             <div class="md-list-item-text">
                 <h3>{{ entity.name }}</h3>
                 <h4>Tel: {{ entity.tel }}</h4>

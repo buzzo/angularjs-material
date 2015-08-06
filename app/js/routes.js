@@ -1,5 +1,7 @@
 'use strict';
 
+require('./modules/patient/patient.service.js'); // Patient
+
 var fs = require('fs');
 
 module.exports = function ($routeProvider) {
@@ -10,7 +12,7 @@ module.exports = function ($routeProvider) {
             css: require('./modules/dashboard/dashboard.css')
         })
         .when('/patient', {
-            controller: ['$scope', '$mdDialog', require('./modules/patient/patient.js')],
+            controller: ['$scope', '$mdDialog', 'Patient', require('./modules/patient/patient.js')],
             template: fs.readFileSync(__dirname + '/modules/patient/patient.html'),
             css: require('./modules/patient/patient.css')
         })
