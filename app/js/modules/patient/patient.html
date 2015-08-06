@@ -4,8 +4,9 @@
     </h2>
 </md-toolbar>
 <md-content style="height: 500px;" md-scroll-shrink>
-    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="isLoading">
+    <div layout="row" layout-sm="column" layout-align="center center" ng-show="isLoading">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        &nbsp;&nbsp;&nbsp;Loading...
     </div>
     <md-list>
         <md-list-item class="md-3-line" ng-show="!isLoading" ng-repeat="entity in entities"

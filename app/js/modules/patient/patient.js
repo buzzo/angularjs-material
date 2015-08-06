@@ -27,6 +27,10 @@ module.exports = function ($scope, $mdDialog, Patient) {
                     _update($scope.entity);
                 };
 
+                $scope.delete = function () {
+                    _delete($scope.entity);
+                };
+
                 $scope.close = function (answer) {
                     $mdDialog.hide(answer);
                 };
@@ -55,6 +59,12 @@ module.exports = function ($scope, $mdDialog, Patient) {
         Patient.update({id: entity.id}, entity, function () {
             // TODO TOAST!
             $scope.isUpdating = false;
+        });
+    }
+
+    function _delete(entity) {
+        Patient.delete({id: entity.id}, entity, function () {
+            console.log('delete');
         });
     }
 };

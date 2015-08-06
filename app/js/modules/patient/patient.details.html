@@ -20,7 +20,7 @@
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>Birthday</label>
-                    <input type="date" ng-model="entity.birthday" ng-disabled="disabled">
+                    <input dateconverter type="date" ng-model="entity.birthday" ng-disabled="disabled">
                 </md-input-container>
             </div>
         </md-dialog-content>
@@ -28,7 +28,10 @@
         <div class="md-actions" layout="row">
             <!--remove icon-->
             <div layout="row" layout-align="start">
-                <md-button class=" delete-icon md-icon-button" aria-label="Delete">
+                <md-button class=" delete-icon md-icon-button" aria-label="Delete" ng-click="delete()">
+                    <md-tooltip>
+                        Delete
+                    </md-tooltip>
                     <md-icon class="material-icons">delete</md-icon>
                 </md-button>
             </div>

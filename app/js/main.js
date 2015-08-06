@@ -20,3 +20,34 @@ app.controller('LeftMenuController', ['$scope', '$location', '$mdSidenav', '$mdU
 
 // mount on window for testing
 window.app = app;
+
+// TODO: place this inside a file
+// general purpose directive to convert yyyy-MM-dd string to Date and back
+// http://stackoverflow.com/questions/11616636/how-to-do-two-way-filtering-in-angular-js
+app.directive('dateconverter', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModel) {
+
+            function fromUser(text) {
+                if (text) {
+                    return text.toString("yyyy-MM-dd");
+                } else {
+                    return '';
+                }
+            }
+
+            function toUser(text) {
+                if (text) {
+                    return new Date(text);
+                } else {
+                    return text;
+                }
+            }
+
+            ngModel.$parsers.push(fromUser);
+            ngModel.$formatters.push(toUser);
+        }
+    };
+});

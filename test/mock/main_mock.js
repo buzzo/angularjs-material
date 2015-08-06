@@ -11,15 +11,14 @@ var requires = [
     'ngMockE2E'
 ];
 
-// patients
 var patients = [
-    {id: 1, name: 'Janet Perkins', tel: '1112212', birthday: new Date(1995, 11, 17), notes: 'Next: 12th Dec'},
-    {id: 2, name: 'Mary Johnson', tel: '4545454', birthday: new Date(2005, 12, 17), notes: ''},
-    {id: 3, name: 'Peter Carlsson', tel: '658789', birthday: new Date(1988, 1, 7), notes: ''},
-    {id: 4, name: 'Margaret D.', tel: '9988676', birthday: new Date(1999, 3, 3), notes: ''},
-    {id: 5, name: 'Rubens Hojj', tel: '+55112443', birthday: new Date(1999, 1, 9), notes: ''},
+    {id: 1, name: 'Janet Perkins', tel: '1112212', birthday: '1995-11-17', notes: 'Next: 12th Dec'},
+    {id: 2, name: 'Mary Johnson', tel: '4545454', birthday: '2005-12-17', notes: ''},
+    {id: 3, name: 'Peter Carlsson', tel: '658789', birthday: '1988-1-7', notes: ''},
+    {id: 4, name: 'Margaret D.', tel: '9988676', birthday: '1999-3-3', notes: ''},
+    {id: 5, name: 'Rubens Hojj', tel: '+55112443', birthday: '1999-1-9', notes: ''},
     {id: 6, name: 'Yum Kin', tel: '', notes: ''},
-    {id: 7, name: 'Walter N. Buzz', tel: '7674323', birthday: new Date(1955, 4, 18), notes: 'Never on time'}
+    {id: 7, name: 'Walter N. Buzz', tel: '7674323', birthday: '1955-4-18', notes: 'Never on time'}
 ];
 
 angular.module('app-mock', requires).run(function ($httpBackend) {
@@ -53,6 +52,25 @@ angular.module('app-mock', requires).run(function ($httpBackend) {
             });
             // add
             patients.push(patient);
+            return [200, patient, {}];
+        } else {
+            // didn't find the patient
+            return [400, patient, {}];
+        }
+    });
+
+    $httpBackend.whenDELETE(/^\/services\/patients\/\d+$/).respond(function (method, url, data) {
+        var patient = angular.fromJson(data);
+        // search
+        var result = patients.filter(function (pat) {
+            return pat.id === patient.id;
+        });
+        if (result.length > 0) {
+            // found!
+            // remove
+            patients = patients.filter(function (pat) {
+                return pat.id !== patient.id;
+            });
             return [200, patient, {}];
         } else {
             // didn't find the patient
