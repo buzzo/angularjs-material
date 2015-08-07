@@ -3,7 +3,7 @@
 var fs = require('fs');
 var angular = require('angular');
 
-module.exports = function ($scope, $mdDialog, Patient) {
+module.exports = function ($scope, $mdDialog, $mdToast, blockUI, Patient) {
 
     _load();
 
@@ -48,17 +48,21 @@ module.exports = function ($scope, $mdDialog, Patient) {
     };
 
     function _load() {
-        $scope.isLoading = true;
+        var list = blockUI.instances.get('list');
+        list.start('Loading...');
         $scope.entities = Patient.query(function () {
-            $scope.isLoading = false;
+            list.stop();
         });
     }
 
     function _update(entity) {
-        $scope.isUpdating = true;
         Patient.update({id: entity.id}, entity, function () {
-            // TODO TOAST!
-            $scope.isUpdating = false;
+            // toast
+            $mdToast.show(
+                $mdToast.simple()
+                    .content('Patient updated!')
+                    .hideDelay(3000)
+            );
         });
     }
 
