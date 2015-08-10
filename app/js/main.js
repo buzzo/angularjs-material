@@ -13,7 +13,7 @@ var requires = [
     'ngResource'
 ];
 
-var app = angular.module('app', requires).config(['$routeProvider', require('./routes')]);
+var app = angular.module('app', requires).config(['$routeProvider', require('./config')]);
 
 app.controller('TopMenuController', ['$scope', '$location', '$mdSidenav', '$mdUtil', require('./modules/main/topMenu.js')]);
 app.controller('LeftMenuController', ['$scope', '$location', '$mdSidenav', '$mdUtil', require('./modules/main/leftMenu.js')]);
