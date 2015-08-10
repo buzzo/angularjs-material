@@ -5,17 +5,15 @@ require('angular-route/angular-route'); //ngRoute
 require('angular-css'); // door3.css
 require('angular-material'); // ngMaterial
 require('angular-resource'); // ngResource
-require('angular-block-ui'); // blockUI
 
 var requires = [
     'ngRoute',
     'door3.css',
     'ngMaterial',
-    'ngResource',
-    'blockUI'
+    'ngResource'
 ];
 
-var app = angular.module('app', requires).config(['$routeProvider', 'blockUIConfig', require('./routes')]);
+var app = angular.module('app', requires).config(['$routeProvider', require('./routes')]);
 
 app.controller('TopMenuController', ['$scope', '$location', '$mdSidenav', '$mdUtil', require('./modules/main/topMenu.js')]);
 app.controller('LeftMenuController', ['$scope', '$location', '$mdSidenav', '$mdUtil', require('./modules/main/leftMenu.js')]);

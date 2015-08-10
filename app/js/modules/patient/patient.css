@@ -1,0 +1,15 @@
+.loading-list {
+    padding: 10px 0;
+}
+
+/*TODO: duplicated background color! find a way to put same background color as main.scss*/
+.layout-list {
+    padding: 10px 120px;
+    background-color: #e5e5e5;
+}
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 30px;
+    right: 25px;
+}

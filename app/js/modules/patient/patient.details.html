@@ -28,7 +28,7 @@
         <div class="md-actions" layout="row">
             <!--remove icon-->
             <div layout="row" layout-align="start">
-                <md-button class=" delete-icon md-icon-button" aria-label="Delete" ng-click="delete();close();">
+                <md-button class="delete-icon md-icon-button" aria-label="Delete" ng-click="delete()" ng-disabled="!disabled">
                     <md-tooltip>
                         Delete
                     </md-tooltip>
@@ -38,17 +38,17 @@
             <div flex></div>
             <div layout="row" layout-align="end">
                 <!--shows when editing-->
-                <md-button ng-show="!disabled" ng-click="save();toggleEditDetails();" class="md-raised md-primary">
+                <md-button ng-show="!disabled" ng-click="save()" class="md-raised md-primary">
                     Save
                 </md-button>
-                <md-button ng-show="!disabled" ng-click="clean();toggleEditDetails();" class="md-warn">
+                <md-button ng-show="!disabled" ng-click="clean()" class="md-warn">
                     Cancel
                 </md-button>
                 <!--shows when NOT editing-->
                 <md-button ng-show="disabled" ng-click="toggleEditDetails()" class="md-raised md-primary">
                     Edit
                 </md-button>
-                <md-button ng-show="disabled" ng-click="close('close')" class="md-raised">
+                <md-button ng-show="disabled" ng-click="close()" class="md-raised">
                     Close
                 </md-button>
             </div>

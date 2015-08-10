@@ -1,17 +1,34 @@
-<md-toolbar class="md-theme-light">
-    <h2 class="md-toolbar-tools">
-        <span>Patients</span>
-    </h2>
-</md-toolbar>
-<md-content style="height: 500px;" md-scroll-shrink block-ui="list">
-    <md-list>
-        <md-list-item class="md-3-line" ng-repeat="entity in entities" ng-click="showDetails(entity, $event)">
-            <div class="md-list-item-text">
-                <h3>{{ entity.name }}</h3>
-                <h4>Tel: {{ entity.tel }}</h4>
-                <p>Notes: {{ entity.notes }}</p>
+<md-content class="layout-list background">
+    <md-toolbar class="md-theme-light">
+        <h2 class="md-toolbar-tools" flex>
+            <span>Patients</span>
+        </h2>
+    </md-toolbar>
+    <md-content>
+        <md-list>
+            <div class="loading-list" layout="row" layout-sm="column" layout-align="center center"
+                 ng-show="isLoading">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                &nbsp;&nbsp;&nbsp;Loading...
             </div>
-            <md-divider inset ng-if="!$last"></md-divider>
-        </md-list-item>
-    </md-list>
+            <md-list-item class="md-3-line" ng-repeat="entity in entities" ng-click="update(entity)"
+                          ng-show="!isLoading">
+                <div class="md-list-item-text">
+                    <h3>{{ entity.name }}</h3>
+                    <h4>Tel: {{ entity.tel }}</h4>
+                    <p>Notes: {{ entity.notes }}</p>
+                </div>
+                <md-divider inset ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
 </md-content>
+
+<div class="fixed-bottom">
+    <md-button class="md-icon-button md-fab md-primary" aria-label="Add Patient" ng-click="add()">
+        <md-tooltip>
+            Add
+        </md-tooltip>
+        <md-icon md-menu-origin class="material-icons">add</md-icon>
+    </md-button>
+</div>

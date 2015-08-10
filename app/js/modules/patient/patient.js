@@ -3,11 +3,19 @@
 var fs = require('fs');
 var angular = require('angular');
 
-module.exports = function ($scope, $mdDialog, $mdToast, blockUI, Patient) {
+module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
 
     _load();
 
-    $scope.showDetails = function (entity, $event) {
+    $scope.add = function () {
+        $scope.showDetails({});
+    };
+
+    $scope.update = function (entity) {
+        $scope.showDetails(entity);
+    };
+
+    $scope.showDetails = function (entity) {
 
         var details = {
             controller: function DialogController($scope, $mdDialog) {
@@ -21,22 +29,23 @@ module.exports = function ($scope, $mdDialog, $mdToast, blockUI, Patient) {
 
                 $scope.clean = function () {
                     $scope.entity = angular.copy(entity);
+                    $scope.toggleEditDetails();
                 };
 
                 $scope.save = function () {
                     _update($scope.entity);
+                    $scope.toggleEditDetails();
                 };
 
                 $scope.delete = function () {
-                    _delete($scope.entity);
+                    _delete($scope.entity, $scope.close);
                 };
 
-                $scope.close = function (answer) {
-                    $mdDialog.hide(answer);
+                $scope.close = function () {
+                    $mdDialog.hide();
                 };
             },
             template: fs.readFileSync(__dirname + '/patient.details.html'),
-            targetEvent: $event
         };
 
         $mdDialog.show(details)
@@ -48,15 +57,16 @@ module.exports = function ($scope, $mdDialog, $mdToast, blockUI, Patient) {
     };
 
     function _load() {
-        var list = blockUI.instances.get('list');
-        list.start('Loading...');
+        $scope.isLoading = true;
         $scope.entities = Patient.query(function () {
-            list.stop();
+            $scope.isLoading = false;
         });
     }
 
     function _update(entity) {
+        $scope.isUpdating = true;
         Patient.update({id: entity.id}, entity, function () {
+            $scope.isUpdating = false;
             // toast
             $mdToast.show(
                 $mdToast.simple()
@@ -66,9 +76,17 @@ module.exports = function ($scope, $mdDialog, $mdToast, blockUI, Patient) {
         });
     }
 
-    function _delete(entity) {
+    function _delete(entity, callback) {
+        $scope.isUpdating = true;
         Patient.delete({id: entity.id}, function () {
-            // TODO TOAST!
+            $scope.isUpdating = false;
+            callback();
+            // toast
+            $mdToast.show(
+                $mdToast.simple()
+                    .content('Patient deleted!')
+                    .hideDelay(3000)
+            );
         });
     }
 };

@@ -4,7 +4,7 @@ require('./modules/patient/patient.service.js'); // Patient
 
 var fs = require('fs');
 
-module.exports = function ($routeProvider, blockUIConfig) {
+module.exports = function ($routeProvider) {
     // route
     $routeProvider
         .when('/dashboard', {
@@ -13,7 +13,7 @@ module.exports = function ($routeProvider, blockUIConfig) {
             css: require('./modules/dashboard/dashboard.css')
         })
         .when('/patient', {
-            controller: ['$scope', '$mdDialog', '$mdToast', 'blockUI', 'Patient', require('./modules/patient/patient.js')],
+            controller: ['$scope', '$mdDialog', '$mdToast', 'Patient', require('./modules/patient/patient.js')],
             template: fs.readFileSync(__dirname + '/modules/patient/patient.html'),
             css: require('./modules/patient/patient.css')
         })
@@ -25,6 +25,4 @@ module.exports = function ($routeProvider, blockUIConfig) {
         .otherwise({
             redirectTo: '/dashboard'
         });
-    // block-ui
-    blockUIConfig.autoBlock = false;
 };
