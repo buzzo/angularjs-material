@@ -8,53 +8,101 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
     _load();
 
     $scope.add = function () {
-        $scope.showDetails({});
+        $scope.showDetails({}, false);
     };
 
     $scope.update = function (entity) {
-        $scope.showDetails(entity);
+        $scope.showDetails(entity, true);
     };
 
-    $scope.showDetails = function (entity) {
-
+    $scope.showDetails = function (entity, isEntityUpdate) {
         var details = {
-            controller: function DialogController($scope, $mdDialog) {
-                $scope.entity = angular.copy(entity);
-
-                $scope.disabled = true;
-
-                $scope.toggleEditDetails = function () {
-                    $scope.disabled = !$scope.disabled;
-                };
-
-                $scope.clean = function () {
-                    $scope.entity = angular.copy(entity);
-                    $scope.toggleEditDetails();
-                };
-
-                $scope.save = function () {
-                    _update($scope.entity);
-                    $scope.toggleEditDetails();
-                };
-
-                $scope.delete = function () {
-                    _delete($scope.entity, $scope.close);
-                };
-
-                $scope.close = function () {
-                    $mdDialog.hide();
-                };
-            },
             template: fs.readFileSync(__dirname + '/patient.details.html'),
+            controller: DetailsDialogController,
+            locals: {
+                entity: entity,
+                isEntityUpdate: isEntityUpdate
+            }
         };
 
         $mdDialog.show(details)
-            .then(function () {
-                _load();
+            .then(function (result) {
+                // all outputs
+                if (result && result.reload) {
+                    _load();
+                }
             }, function () {
+                // 'esc' pressed
                 _load();
+            }).finally(function () {
+                // clean up
+                details = undefined;
             });
     };
+
+    function DetailsDialogController($scope, $mdDialog, $mdToast, entity, isEntityUpdate) {
+
+        $scope.entity = angular.copy(entity);
+
+        // 'viewMode' controls the change between view and edit mode
+        // if we are updating then starts in 'view only' mode
+        // if is an add then starts in 'editing' mode (allow edit)
+        $scope.viewMode = isEntityUpdate;
+        $scope.isEntityUpdate = isEntityUpdate;
+        $scope.wasEntityUpdated = false;
+
+        $scope.toggleViewMode = function () {
+            $scope.viewMode = !$scope.viewMode;
+        };
+
+        $scope.cancel = function () {
+            if (isEntityUpdate) {
+                // update
+                $scope.clean();
+                $scope.toggleViewMode();
+            } else {
+                // add
+                $scope.close($scope.wasEntityUpdated);
+            }
+        };
+
+        $scope.clean = function () {
+            // retrieve the original entity
+            $scope.entity = angular.copy(entity);
+        };
+
+        $scope.save = function () {
+            if (isEntityUpdate) {
+                // update
+                $scope.wasEntityUpdated = true;
+                $scope.toggleViewMode();
+                _update($scope.entity,
+                    function () {
+                        _simpleToast($mdToast, 'Patient updated!');
+                    });
+            } else {
+                // add
+                _add($scope.entity,
+                    function () {
+                        $scope.close(true);
+                        _simpleToast($mdToast, 'Patient added!');
+                    });
+            }
+        };
+
+        $scope.delete = function () {
+            _delete($scope.entity,
+                function () {
+                    $scope.close(true);
+                    _simpleToast($mdToast, 'Patient deleted!');
+                });
+        };
+
+        $scope.close = function (reload) {
+            var result = {reload: reload};
+            $mdDialog.hide(result);
+        };
+    }
 
     function _load() {
         $scope.isLoading = true;
@@ -63,30 +111,32 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
         });
     }
 
-    function _update(entity) {
+    function _add(entity, sucess) {
+        console.log(entity);
+        sucess();
+    }
+
+    function _update(entity, sucess) {
         $scope.isUpdating = true;
         Patient.update({id: entity.id}, entity, function () {
             $scope.isUpdating = false;
-            // toast
-            $mdToast.show(
-                $mdToast.simple()
-                    .content('Patient updated!')
-                    .hideDelay(3000)
-            );
+            sucess();
         });
     }
 
-    function _delete(entity, callback) {
+    function _delete(entity, sucess) {
         $scope.isUpdating = true;
         Patient.delete({id: entity.id}, function () {
             $scope.isUpdating = false;
-            callback();
-            // toast
-            $mdToast.show(
-                $mdToast.simple()
-                    .content('Patient deleted!')
-                    .hideDelay(3000)
-            );
+            sucess();
         });
+    }
+
+    function _simpleToast($mdToast, message) {
+        $mdToast.show(
+            $mdToast.simple()
+                .content(message)
+                .hideDelay(3000)
+        );
     }
 };
