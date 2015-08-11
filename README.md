@@ -10,10 +10,20 @@ Goal:
 - using material as UI
 
 TODO:
-- add CRUD example
-- research + add security (login, logout)
-- improve login screen
+
+- finish full add patient
+- fix patient.css 'TODO' (background color)
+- implement list search
+- implement virtual scrolling
+- move directive inside main.js to some place
+- improve left menu
+- improve 'my account'
+- improve dashboard
 - i18n
+- improve tests (they are just examples today)
+- use angular-material.scss from source (from npm)
+- improve login screen
+- research + add security (login, logout)
 
 ### Commands
 
