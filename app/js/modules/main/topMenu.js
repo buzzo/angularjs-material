@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function ($scope, $location, $mdSidenav, $mdUtil) {
-
     function buildToggler() {
         return $mdUtil.debounce(function () {
             $mdSidenav('left').toggle();

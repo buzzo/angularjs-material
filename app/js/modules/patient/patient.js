@@ -8,7 +8,7 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
     _load();
 
     $scope.add = function () {
-        $scope.showDetails({}, false);
+        $scope.showDetails(new Patient, false);
     };
 
     $scope.update = function (entity) {
