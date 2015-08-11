@@ -73,35 +73,64 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
 
         $scope.save = function () {
             if (isEntityUpdate) {
-                // update
-                $scope.wasEntityUpdated = true;
-                $scope.toggleViewMode();
-                _update($scope.entity,
-                    function () {
-                        _simpleToast($mdToast, 'Patient updated!');
-                    });
+                _update();
             } else {
-                // add
-                _add($scope.entity,
-                    function () {
-                        $scope.close(true);
-                        _simpleToast($mdToast, 'Patient added!');
-                    });
+                _add();
             }
         };
 
         $scope.delete = function () {
-            _delete($scope.entity,
-                function () {
-                    $scope.close(true);
-                    _simpleToast($mdToast, 'Patient deleted!');
-                });
+            _delete();
         };
 
         $scope.close = function (reload) {
             var result = {reload: reload};
             $mdDialog.hide(result);
         };
+
+        function _add() {
+            var addingToast = _simpleToast('Adding...', false);
+            // TODO: rest call
+            console.log($scope.entity);
+            $mdToast.hide(addingToast);
+            $scope.close(true);
+            _simpleToast('Patient added!', 3000);
+        }
+
+        function _update() {
+            var updatingToast = _simpleToast('Updating...', false);
+            $scope.isUpdating = true;
+            $scope.wasEntityUpdated = true;
+            $scope.toggleViewMode();
+            Patient.update({id: $scope.entity.id}, $scope.entity, function () {
+                $scope.isUpdating = false;
+                $mdToast.hide(updatingToast);
+                _simpleToast('Patient updated!', 3000);
+            });
+        }
+
+        function _delete() {
+            $scope.isUpdating = true;
+            var deletingToast = _simpleToast('Deleting...', false);
+            Patient.delete({id: $scope.entity.id}, function () {
+                $scope.isUpdating = false;
+                $mdToast.hide(deletingToast);
+                $scope.close(true);
+                _simpleToast('Patient deleted!', 3000);
+            });
+        }
+
+        /**
+         * @param delay int in milliseconds or false if never hide the toast.
+         * @returns toast object. Can be used to hide ($mdToast.hide()) if delay param is false (the toast will not hide itself).
+         */
+        function _simpleToast(message, delay) {
+            var toast = $mdToast.simple()
+                .content(message)
+                .hideDelay(delay);
+            $mdToast.show(toast);
+            return toast;
+        }
     }
 
     function _load() {
@@ -111,32 +140,4 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
         });
     }
 
-    function _add(entity, sucess) {
-        console.log(entity);
-        sucess();
-    }
-
-    function _update(entity, sucess) {
-        $scope.isUpdating = true;
-        Patient.update({id: entity.id}, entity, function () {
-            $scope.isUpdating = false;
-            sucess();
-        });
-    }
-
-    function _delete(entity, sucess) {
-        $scope.isUpdating = true;
-        Patient.delete({id: entity.id}, function () {
-            $scope.isUpdating = false;
-            sucess();
-        });
-    }
-
-    function _simpleToast($mdToast, message) {
-        $mdToast.show(
-            $mdToast.simple()
-                .content(message)
-                .hideDelay(3000)
-        );
-    }
 };
