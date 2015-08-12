@@ -21,19 +21,35 @@ var patients = [
     {id: 7, name: 'Walter N. Buzz', tel: '7674323', birthday: '1955-4-18', notes: 'Never on time'}
 ];
 
+var id = 1000;
+
 angular.module('app-mock', requires).run(function ($httpBackend) {
 
     $httpBackend.whenGET('/services/patients').respond(function () {
-        // sort by ID
-        patients.sort(function compare(a, b) {
-            if (a.id < b.id)
-                return -1;
-            if (a.id > b.id)
-                return 1;
-            return 0;
-        });
-
         return [200, patients];
+    });
+
+    $httpBackend.whenPOST('/services/patients').respond(function (method, url, data) {
+        var patient = angular.fromJson(data);
+        patient.id = id++;
+
+        if(!patient.hasOwnProperty('name')) {
+            return [400, {}, {}];
+        }
+        if(!patient.hasOwnProperty('tel')) {
+            patient.tel = '';
+        }
+        if(!patient.hasOwnProperty('birthday')) {
+            patient.birthday = '';
+        }
+        if(!patient.hasOwnProperty('notes')) {
+            patient.notes = '';
+        }
+
+        // always push in the end so the array is already sorted
+        patients.push(patient);
+
+        return [200, patient, {}];
     });
 
     // matches '/services/patients/1' (or ending with number)

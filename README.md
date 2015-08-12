@@ -11,7 +11,8 @@ Goal:
 
 TODO:
 
-- finish full add patient
+- implement all error callbacks from REST
+- implement UNDO for operations
 - fix patient.css 'TODO' (background color)
 - implement list search
 - implement virtual scrolling

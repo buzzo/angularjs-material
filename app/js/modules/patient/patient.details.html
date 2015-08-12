@@ -47,7 +47,7 @@
             <div flex></div>
             <div layout="row" layout-align="end">
                 <!--shows when editing-->
-                <md-button ng-show="!viewMode" ng-disabled="!entityForm.$valid" ng-click="save()" class="md-raised md-primary">
+                <md-button ng-show="!viewMode" ng-disabled="!entityForm.$valid||isUpdating" ng-click="save()" class="md-raised md-primary">
                     Save
                 </md-button>
                 <md-button ng-show="!viewMode" ng-click="cancel()" class="md-warn">

@@ -90,11 +90,13 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
 
         function _add() {
             var addingToast = _simpleToast('Adding...', false);
-            // TODO: rest call
-            console.log($scope.entity);
-            $mdToast.hide(addingToast);
-            $scope.close(true);
-            _simpleToast('Patient added!', 3000);
+            $scope.isUpdating = true;
+            $scope.entity.$save(function (data) {
+                $scope.isUpdating = false;
+                $mdToast.hide(addingToast);
+                $scope.close(true);
+                _simpleToast('Patient added!', 3000);
+            });
         }
 
         function _update() {
