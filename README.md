@@ -11,7 +11,6 @@ Goal:
 
 TODO:
 
-- move directive inside main.js to some place
 - implement list search
 - implement virtual scrolling
 - implement UNDO for operations
