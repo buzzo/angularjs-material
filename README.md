@@ -11,12 +11,15 @@ Goal:
 
 TODO:
 
-- implement all error callbacks from REST
-- implement UNDO for operations
 - fix patient.css 'TODO' (background color)
+- move directive inside main.js to some place
 - implement list search
 - implement virtual scrolling
-- move directive inside main.js to some place
+- implement UNDO for operations
+- implement server side validation errors (like unique name for patient)
+- how handle input form with spaces only?
+- show message when list is empty
+- show message (inside list div) or picture when get an error to load list
 - improve left menu
 - improve 'my account'
 - improve dashboard

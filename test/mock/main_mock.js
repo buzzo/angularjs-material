@@ -1,6 +1,6 @@
 'use strict';
 
-var RESPONSE_DELAY = 2000; // 2s
+var RESPONSE_DELAY = 1000; // 1s
 
 var angular = require('angular');
 require('../../app/js/main.js'); // app
@@ -31,31 +31,19 @@ angular.module('app-mock', requires).run(function ($httpBackend) {
 
     $httpBackend.whenPOST('/services/patients').respond(function (method, url, data) {
         var patient = angular.fromJson(data);
+
+        if (!patient.hasOwnProperty('name')) {
+            return [400, {message: 'Name is required.'}];
+        }
+
         patient.id = id++;
-
-        if(!patient.hasOwnProperty('name')) {
-            return [400, {}, {}];
-        }
-        if(!patient.hasOwnProperty('tel')) {
-            patient.tel = '';
-        }
-        if(!patient.hasOwnProperty('birthday')) {
-            patient.birthday = '';
-        }
-        if(!patient.hasOwnProperty('notes')) {
-            patient.notes = '';
-        }
-
-        // always push in the end so the array is already sorted
         patients.push(patient);
 
-        return [200, patient, {}];
+        return [200, patient];
     });
 
-    // matches '/services/patients/1' (or ending with number)
     $httpBackend.whenPUT(/^\/services\/patients\/\d+$/).respond(function (method, url, data) {
         var patient = angular.fromJson(data);
-
         // search
         var result = patients.filter(function (pat) {
             return pat.id === patient.id;
@@ -68,10 +56,18 @@ angular.module('app-mock', requires).run(function ($httpBackend) {
             });
             // add
             patients.push(patient);
-            return [200, patient, {}];
+            // sort by ID
+            patients.sort(function compare(a, b) {
+                if (a.id < b.id)
+                    return -1;
+                if (a.id > b.id)
+                    return 1;
+                return 0;
+            });
+            return [200, patient];
         } else {
             // didn't find the patient
-            return [400, patient, {}];
+            return [400, {message: 'No patient found with id:' + patient.id}];
         }
     });
 
@@ -79,7 +75,8 @@ angular.module('app-mock', requires).run(function ($httpBackend) {
         var idRegex = /\/(\d+)/;
         var match = idRegex.exec(url);
         if (match == null) {
-            return [400, {}, {}];
+            // does this ever will happen?
+            return [400, {message: 'Bad URL'}];
         } else {
             var id = match[1];
             // search
@@ -92,9 +89,10 @@ angular.module('app-mock', requires).run(function ($httpBackend) {
                 patients = patients.filter(function (pat) {
                     return pat.id != id;
                 });
-                return [200, {}, {}];
+                return [200, {}];
             } else {
-                return [400, {}, {}];
+                // didn't find the patient
+                return [400, {message: 'No patient found with id ' + id}];
             }
         }
     });

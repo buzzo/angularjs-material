@@ -50,6 +50,7 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
         $scope.viewMode = isEntityUpdate;
         $scope.isEntityUpdate = isEntityUpdate;
         $scope.wasEntityUpdated = false;
+        $scope.isUpdating = false;
 
         $scope.toggleViewMode = function () {
             $scope.viewMode = !$scope.viewMode;
@@ -91,11 +92,28 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
         function _add() {
             var addingToast = _simpleToast('Adding...', false);
             $scope.isUpdating = true;
+            $scope.wasEntityUpdated = true;
             $scope.entity.$save(function (data) {
-                $scope.isUpdating = false;
                 $mdToast.hide(addingToast);
-                $scope.close(true);
                 _simpleToast('Patient added!', 3000);
+                $scope.close(true);
+            }, function (error) {
+                $mdToast.hide(addingToast);
+                _errorToast(error, _add);
+            });
+        }
+
+        function _delete() {
+            var deletingToast = _simpleToast('Deleting...', false);
+            $scope.isUpdating = true;
+            $scope.wasEntityUpdated = true;
+            Patient.delete({id: $scope.entity.id}, function () {
+                $mdToast.hide(deletingToast);
+                _simpleToast('Patient deleted!', 3000);
+                $scope.close(true);
+            }, function (error) {
+                $mdToast.hide(deletingToast);
+                _errorToast(error, _delete);
             });
         }
 
@@ -105,20 +123,12 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
             $scope.wasEntityUpdated = true;
             $scope.toggleViewMode();
             Patient.update({id: $scope.entity.id}, $scope.entity, function () {
-                $scope.isUpdating = false;
                 $mdToast.hide(updatingToast);
                 _simpleToast('Patient updated!', 3000);
-            });
-        }
-
-        function _delete() {
-            $scope.isUpdating = true;
-            var deletingToast = _simpleToast('Deleting...', false);
-            Patient.delete({id: $scope.entity.id}, function () {
                 $scope.isUpdating = false;
-                $mdToast.hide(deletingToast);
-                $scope.close(true);
-                _simpleToast('Patient deleted!', 3000);
+            }, function (error) {
+                $mdToast.hide(updatingToast);
+                _errorToast(error, _update);
             });
         }
 
@@ -139,6 +149,31 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
         $scope.isLoading = true;
         $scope.entities = Patient.query(function () {
             $scope.isLoading = false;
+        }, function (error) {
+            $scope.entities = {};
+            $scope.isLoading = false;
+            _errorToast(error, _load);
+        });
+    }
+
+    /**
+     * Shows error toast
+     * @param errorObj object to be logged for error trace
+     * @param retry function when user click retry button
+     * @private
+     */
+    function _errorToast(errorObj, retry) {
+        if (errorObj) {
+            console.warn(errorObj);
+        }
+        var toast = $mdToast.simple()
+            .content("Ops, something when wrong in the server...")
+            .action('RETRY')
+            .hideDelay(6000);
+        $mdToast.show(toast).then(function (option) {
+            if (option === 'ok') { // pressed RETRY
+                retry();
+            }
         });
     }
 
