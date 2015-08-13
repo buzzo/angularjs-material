@@ -11,7 +11,6 @@ Goal:
 
 TODO:
 
-- fix patient.css 'TODO' (background color)
 - move directive inside main.js to some place
 - implement list search
 - implement virtual scrolling

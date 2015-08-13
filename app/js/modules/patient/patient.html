@@ -1,4 +1,4 @@
-<md-content class="layout-list background">
+<md-content class="layout-padding background">
     <md-toolbar class="md-theme-light">
         <h2 class="md-toolbar-tools" flex>
             <span>Patients</span>
@@ -16,6 +16,7 @@
                 <div class="md-list-item-text">
                     <h3>{{ entity.name }}</h3>
                     <h4>Tel: {{ entity.tel }}</h4>
+
                     <p>Notes: {{ entity.notes }}</p>
                 </div>
                 <md-divider inset ng-if="!$last"></md-divider>
