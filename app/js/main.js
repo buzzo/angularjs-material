@@ -15,7 +15,7 @@ var requires = [
     'ngMessages'
 ];
 
-angular
+var app = angular
     .module('app', requires)
     .config(['$routeProvider', require('./config')]);
 
@@ -25,3 +25,6 @@ require('./common/menu.top.js');
 
 // common directives
 require('./common/converter.date.js');
+
+// services
+require('./modules/patient/patient.service.js'); // Patient

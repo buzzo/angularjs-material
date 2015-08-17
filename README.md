@@ -11,6 +11,7 @@ Goal:
 
 TODO:
 
+- i18n
 - implement list search
 - implement virtual scrolling
 - implement UNDO for operations
@@ -18,10 +19,8 @@ TODO:
 - how handle input form with spaces only?
 - show message when list is empty
 - show message (inside list div) or picture when get an error to load list
-- improve left menu
 - improve 'my account'
 - improve dashboard
-- i18n
 - improve tests (they are just examples today)
 - use angular-material.scss from source (from npm)
 - improve login screen

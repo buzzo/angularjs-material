@@ -8,7 +8,7 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
     _load();
 
     $scope.add = function () {
-        $scope.showDetails(new Patient, false);
+        $scope.showDetails(new Patient(), false);
     };
 
     $scope.update = function (entity) {
@@ -93,7 +93,7 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
             var addingToast = _simpleToast('Adding...', false);
             $scope.isUpdating = true;
             $scope.wasEntityUpdated = true;
-            $scope.entity.$save(function (data) {
+            $scope.entity.$save(function () {
                 $mdToast.hide(addingToast);
                 _simpleToast('Patient added!', 3000);
                 $scope.close(true);

@@ -1,7 +1,5 @@
 'use strict';
 
-require('./modules/patient/patient.service.js'); // Patient
-
 var fs = require('fs');
 
 module.exports = function ($routeProvider) {

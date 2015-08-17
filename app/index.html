@@ -18,14 +18,22 @@
 
         <!--left menu-->
         <md-sidenav class="md-sidenav-left" md-component-id="left">
+
             <div ng-controller="LeftMenuController">
+                <md-toolbar >
+                    <h5 class="md-toolbar-tools">
+                        <span>My App</span>
+                    </h5>
+                </md-toolbar>
                 <md-list>
                     <md-list-item ng-click="navigateTo('dashboard')">
-                        Dashboard
+                        <md-icon class="material-icons sm-icon-margin">poll</md-icon>
+                        <p>Dashboard</p>
                     </md-list-item>
                     <md-divider></md-divider>
                     <md-list-item ng-click="navigateTo('patient')">
-                        Patients
+                        <md-icon class="material-icons sm-icon-margin" >people</md-icon>
+                        <p>Patients</p>
                     </md-list-item>
                     <md-divider></md-divider>
                 </md-list>
