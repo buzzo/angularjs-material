@@ -1,7 +1,7 @@
 <md-content class="layout-padding background">
     <md-toolbar class="md-theme-light">
         <h2 class="md-toolbar-tools" flex>
-            <span>Patients</span>
+            <span>{{'PATIENTS'|translate}}</span>
         </h2>
     </md-toolbar>
     <md-content>
@@ -9,15 +9,14 @@
             <div class="loading-padding" layout="row" layout-sm="column" layout-align="center center"
                  ng-show="isLoading">
                 <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-                &nbsp;&nbsp;&nbsp;Loading...
+                &nbsp;&nbsp;&nbsp;{{'LOADING'|translate}}...
             </div>
             <md-list-item class="md-3-line" ng-repeat="entity in entities" ng-click="update(entity)"
                           ng-show="!isLoading">
                 <div class="md-list-item-text">
                     <h3>{{ entity.name }}</h3>
-                    <h4>Tel: {{ entity.tel }}</h4>
-
-                    <p>Notes: {{ entity.notes }}</p>
+                    <h4>{{'TELEPHONE'|translate}}: {{ entity.tel }}</h4>
+                    <p>{{'NOTES'|translate}}: {{ entity.notes }}</p>
                 </div>
                 <md-divider inset ng-if="!$last"></md-divider>
             </md-list-item>
@@ -26,9 +25,9 @@
 </md-content>
 
 <div class="fixed-bottom">
-    <md-button class="md-icon-button md-fab md-primary" aria-label="Add Patient" ng-click="add()">
+    <md-button class="md-icon-button md-fab md-primary" ng-click="add()">
         <md-tooltip>
-            Add
+            {{'ADD'|translate}}
         </md-tooltip>
         <md-icon md-menu-origin class="material-icons">add</md-icon>
     </md-button>

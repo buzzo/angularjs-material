@@ -24,14 +24,16 @@
                     </div>
                     <md-input-container md-no-float>
                         <md-icon class="material-icons username">person_pin</md-icon>
-                        <input ng-model="user.username" type="text" placeholder="Username (required)" ng-required="true">
+                        <input ng-model="user.username" type="text"
+                               placeholder="{{'USERNAME'|translate}} ({{'REQUIRED'|translate}})" ng-required="true">
                     </md-input-container>
                     <md-input-container md-no-float>
                         <md-icon class="material-icons password">lock_outline</md-icon>
-                        <input ng-model="user.password" type="password" placeholder="Password (required)" ng-required="true">
+                        <input ng-model="user.password" type="password"
+                               placeholder="{{'PASSWORD'|translate}} ({{'REQUIRED'|translate}})" ng-required="true">
                     </md-input-container>
                     <div layout="row" layout-align="end end">
-                        <md-button class="md-raised md-primary">Log in</md-button>
+                        <md-button class="md-raised md-primary">{{'LOG_IN'|translate}}</md-button>
                     </div>
 
                 </div>

@@ -28,12 +28,12 @@
                 <md-list>
                     <md-list-item ng-click="navigateTo('dashboard')">
                         <md-icon class="material-icons sm-icon-margin">poll</md-icon>
-                        <p>Dashboard</p>
+                        <p>{{'DASHBOARD'|translate}}</p>
                     </md-list-item>
                     <md-divider></md-divider>
                     <md-list-item ng-click="navigateTo('patient')">
                         <md-icon class="material-icons sm-icon-margin" >people</md-icon>
-                        <p>Patients</p>
+                        <p>{{'PATIENTS'|translate}}</p>
                     </md-list-item>
                     <md-divider></md-divider>
                 </md-list>
@@ -43,24 +43,24 @@
         <!-- top menu -->
         <md-toolbar ng-controller="TopMenuController">
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeftNav()">
+                <md-button class="md-icon-button" ng-click="toggleLeftNav()">
                     <md-icon class="material-icons">menu</md-icon>
                 </md-button>
                 <md-menu md-offset="0 40">
-                    <md-button class="md-icon-button" aria-label="User Settings" ng-click="$mdOpenMenu()">
+                    <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
                         <md-icon md-menu-origin class="material-icons">settings</md-icon>
                     </md-button>
                     <md-menu-content>
                         <md-menu-item ng-click="navigateTo('account')">
                             <md-button>
                                 <md-icon md-menu-origin class="material-icons">perm_identity</md-icon>
-                                My Account
+                                {{'MY_ACCOUNT'|translate}}
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
                             <md-button>
                                 <md-icon md-menu-origin class="material-icons">exit_to_app</md-icon>
-                                Sign out
+                                {{'SIGN_OUT'|translate}}
                             </md-button>
                         </md-menu-item>
                     </md-menu-content>

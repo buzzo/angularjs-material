@@ -11,16 +11,16 @@ Goal:
 
 TODO:
 
-- i18n
 - implement list search
 - implement virtual scrolling
+- improve dashboard example
+- improve account example
+- create a change language
 - implement UNDO for operations
 - implement server side validation errors (like unique name for patient)
 - how handle input form with spaces only?
 - show message when list is empty
 - show message (inside list div) or picture when get an error to load list
-- improve 'my account'
-- improve dashboard
 - improve tests (they are just examples today)
 - use angular-material.scss from source (from npm)
 - improve login screen

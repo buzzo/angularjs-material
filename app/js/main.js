@@ -6,18 +6,20 @@ require('angular-css'); // door3.css
 require('angular-material'); // ngMaterial
 require('angular-resource'); // ngResource
 require('angular-messages'); // ngMessages
+require('angular-translate'); // pascalprecht.translate
 
 var requires = [
     'ngRoute',
     'door3.css',
     'ngMaterial',
     'ngResource',
-    'ngMessages'
+    'ngMessages',
+    'pascalprecht.translate'
 ];
 
 var app = angular
     .module('app', requires)
-    .config(['$routeProvider', require('./config')]);
+    .config(['$routeProvider', '$translateProvider', require('./config')]);
 
 // index.html controllers
 require('./common/menu.left.js');

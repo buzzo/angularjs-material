@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 
-module.exports = function ($routeProvider) {
+module.exports = function ($routeProvider, $translateProvider) {
     // route
     $routeProvider
         .when('/dashboard', {
@@ -11,7 +11,7 @@ module.exports = function ($routeProvider) {
             css: require('./modules/dashboard/dashboard.css')
         })
         .when('/patient', {
-            controller: ['$scope', '$mdDialog', '$mdToast', 'Patient', require('./modules/patient/patient.js')],
+            controller: ['$scope', '$mdDialog', '$mdToast', '$translate', 'Patient', require('./modules/patient/patient.js')],
             template: fs.readFileSync(__dirname + '/modules/patient/patient.html'),
             css: require('./modules/patient/patient.css')
         })
@@ -23,4 +23,8 @@ module.exports = function ($routeProvider) {
         .otherwise({
             redirectTo: '/dashboard'
         });
+    // i18n
+    $translateProvider.translations('en-us', require('./locales/en-us.json'));
+    $translateProvider.translations('pt-br', require('./locales/pt-br.json'));
+    $translateProvider.preferredLanguage('pt-br');
 };

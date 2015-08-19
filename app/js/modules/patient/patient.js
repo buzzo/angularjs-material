@@ -3,7 +3,7 @@
 var fs = require('fs');
 var angular = require('angular');
 
-module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
+module.exports = function ($scope, $mdDialog, $mdToast, $translate, Patient) {
 
     _load();
 
@@ -90,45 +90,51 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
         };
 
         function _add() {
-            var addingToast = _simpleToast('Adding...', false);
-            $scope.isUpdating = true;
-            $scope.wasEntityUpdated = true;
-            $scope.entity.$save(function () {
-                $mdToast.hide(addingToast);
-                _simpleToast('Patient added!', 3000);
-                $scope.close(true);
-            }, function (error) {
-                $mdToast.hide(addingToast);
-                _errorToast(error, _add);
+            $translate(['ADDING', 'PATIENT_ADDED']).then(function (translations) {
+                var addingToast = _simpleToast(translations.ADDING + '...', false);
+                $scope.isUpdating = true;
+                $scope.wasEntityUpdated = true;
+                $scope.entity.$save(function () {
+                    $mdToast.hide(addingToast);
+                    _simpleToast(translations.PATIENT_ADDED + '!', 3000);
+                    $scope.close(true);
+                }, function (error) {
+                    $mdToast.hide(addingToast);
+                    _errorToast(error, _add);
+                });
             });
         }
 
         function _delete() {
-            var deletingToast = _simpleToast('Deleting...', false);
-            $scope.isUpdating = true;
-            $scope.wasEntityUpdated = true;
-            Patient.delete({id: $scope.entity.id}, function () {
-                $mdToast.hide(deletingToast);
-                _simpleToast('Patient deleted!', 3000);
-                $scope.close(true);
-            }, function (error) {
-                $mdToast.hide(deletingToast);
-                _errorToast(error, _delete);
+            $translate(['REMOVING', 'PATIENT_REMOVED']).then(function (translations) {
+                var deletingToast = _simpleToast(translations.REMOVING + '...', false);
+                $scope.isUpdating = true;
+                $scope.wasEntityUpdated = true;
+                Patient.delete({id: $scope.entity.id}, function () {
+                    $mdToast.hide(deletingToast);
+                    _simpleToast(translations.PATIENT_REMOVED + '!', 3000);
+                    $scope.close(true);
+                }, function (error) {
+                    $mdToast.hide(deletingToast);
+                    _errorToast(error, _delete);
+                });
             });
         }
 
         function _update() {
-            var updatingToast = _simpleToast('Updating...', false);
-            $scope.isUpdating = true;
-            $scope.wasEntityUpdated = true;
-            $scope.toggleViewMode();
-            Patient.update({id: $scope.entity.id}, $scope.entity, function () {
-                $mdToast.hide(updatingToast);
-                _simpleToast('Patient updated!', 3000);
-                $scope.isUpdating = false;
-            }, function (error) {
-                $mdToast.hide(updatingToast);
-                _errorToast(error, _update);
+            $translate(['UPDATING', 'PATIENT_UPDATED']).then(function (translations) {
+                var updatingToast = _simpleToast(translations.UPDATING + '...', false);
+                $scope.isUpdating = true;
+                $scope.wasEntityUpdated = true;
+                $scope.toggleViewMode();
+                Patient.update({id: $scope.entity.id}, $scope.entity, function () {
+                    $mdToast.hide(updatingToast);
+                    _simpleToast(translations.PATIENT_UPDATED + '!', 3000);
+                    $scope.isUpdating = false;
+                }, function (error) {
+                    $mdToast.hide(updatingToast);
+                    _errorToast(error, _update);
+                });
             });
         }
 
@@ -166,14 +172,16 @@ module.exports = function ($scope, $mdDialog, $mdToast, Patient) {
         if (errorObj) {
             console.warn(errorObj);
         }
-        var toast = $mdToast.simple()
-            .content("Ops, something when wrong in the server...")
-            .action('RETRY')
-            .hideDelay(6000);
-        $mdToast.show(toast).then(function (option) {
-            if (option === 'ok') { // pressed RETRY
-                retry();
-            }
+        $translate(['SERVER_COMMUNICATION_ERROR', 'RETRY']).then(function (translations) {
+            var toast = $mdToast.simple()
+                .content(translations.SERVER_COMMUNICATION_ERROR)
+                .action(translations.RETRY)
+                .hideDelay(6000);
+            $mdToast.show(toast).then(function (option) {
+                if (option === 'ok') { // pressed RETRY
+                    retry();
+                }
+            });
         });
     }
 
