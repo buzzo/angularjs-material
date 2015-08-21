@@ -1,6 +1,8 @@
 {
   LOADING: 'Carregando',
   RETRY: 'Repetir',
+  BACK: 'Voltar',
+  SEARCH: 'Procurar',
   USERNAME: 'Usuário',
   PASSWORD: 'Senha',
   LOG_IN: 'Entrar',
@@ -21,6 +23,7 @@
   PATIENT_ADDED: 'Paciente adicionado',
   PATIENT_REMOVED: 'Paciente removido',
   PATIENT_UPDATED: 'Paciente atualizado',
+  MANAGEMENT: 'Gerenciamento',
   MY_ACCOUNT: 'Minha Conta',
   NAME: 'Nome',
   BIRTHDAY: 'Data de Aniversário',

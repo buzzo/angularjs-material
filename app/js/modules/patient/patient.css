@@ -3,11 +3,11 @@
 }
 
 .layout-padding {
-    padding: 10px 120px;
+    padding: 10px 50px;
 }
 
 .fixed-bottom {
     position: fixed;
-    bottom: 30px;
-    right: 25px;
+    bottom: 20px;
+    right: 35px;
 }

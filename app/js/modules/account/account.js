@@ -1,6 +1,11 @@
 'use strict';
 
-module.exports = function ($scope) {
+module.exports = function ($scope, $translate, SharedContext) {
+
+    $translate('MY_ACCOUNT').then(function (translation) {
+        SharedContext.title = translation;
+    });
+
     $scope.title = 'Account';
 
     var columnDefs = [

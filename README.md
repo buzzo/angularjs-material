@@ -12,6 +12,7 @@ Goal:
 TODO:
 
 - implement list search
+- (bug) left sidenav is not sliding (just showing up)
 - implement virtual scrolling
 - improve dashboard example
 - improve account example

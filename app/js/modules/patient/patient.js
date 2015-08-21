@@ -3,7 +3,11 @@
 var fs = require('fs');
 var angular = require('angular');
 
-module.exports = function ($scope, $mdDialog, $mdToast, $translate, Patient) {
+module.exports = function ($scope, $mdDialog, $mdToast, $translate, SharedContext, Patient) {
+
+    $translate('PATIENTS').then(function (translation) {
+        SharedContext.title = translation;
+    });
 
     _load();
 

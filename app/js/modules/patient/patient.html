@@ -1,31 +1,27 @@
-<md-content class="layout-padding background">
-    <md-toolbar class="md-theme-light">
-        <h2 class="md-toolbar-tools" flex>
-            <span>{{'PATIENTS'|translate}}</span>
-        </h2>
-    </md-toolbar>
-    <md-content>
-        <md-list>
+<div class="layout-padding">
+    <md-card flex-gt-sm="90" flex-gt-md="80">
+        <md-card-content>
             <div class="loading-padding" layout="row" layout-sm="column" layout-align="center center"
                  ng-show="isLoading">
                 <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 &nbsp;&nbsp;&nbsp;{{'LOADING'|translate}}...
             </div>
-            <md-list-item class="md-3-line" ng-repeat="entity in entities" ng-click="update(entity)"
-                          ng-show="!isLoading">
-                <div class="md-list-item-text">
-                    <h3>{{ entity.name }}</h3>
-                    <h4>{{'TELEPHONE'|translate}}: {{ entity.tel }}</h4>
-                    <p>{{'NOTES'|translate}}: {{ entity.notes }}</p>
-                </div>
-                <md-divider inset ng-if="!$last"></md-divider>
-            </md-list-item>
-        </md-list>
-    </md-content>
-</md-content>
+            <md-list ng-show="!isLoading">
+                <md-list-item class="md-3-line" ng-repeat="entity in entities" ng-click="update(entity)">
+                    <div class="md-list-item-text">
+                        <h3>{{ entity.name }}</h3>
+                        <h4>{{'TELEPHONE'|translate}}: {{ entity.tel }}</h4>
+                        <p>{{'NOTES'|translate}}: {{ entity.notes }}</p>
+                    </div>
+                    <md-divider inset ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
+</div>
 
 <div class="fixed-bottom">
-    <md-button class="md-icon-button md-fab md-primary" ng-click="add()">
+    <md-button class="md-fab" ng-click="add()">
         <md-tooltip>
             {{'ADD'|translate}}
         </md-tooltip>

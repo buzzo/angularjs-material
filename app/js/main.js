@@ -19,14 +19,15 @@ var requires = [
 
 var app = angular
     .module('app', requires)
-    .config(['$routeProvider', '$translateProvider', require('./config')]);
+    .config(['$routeProvider', '$translateProvider', '$mdThemingProvider', require('./config')]);
+
+// services
+require('./common/shared.context.js'); // SharedContext
+require('./modules/patient/patient.service.js'); // Patient
+
+// directives
+require('./common/converter.date.js');
 
 // index.html controllers
 require('./common/menu.left.js');
-require('./common/menu.top.js');
-
-// common directives
-require('./common/converter.date.js');
-
-// services
-require('./modules/patient/patient.service.js'); // Patient
+require('./common/top.bar.js');

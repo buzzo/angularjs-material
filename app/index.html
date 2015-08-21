@@ -14,64 +14,85 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
 
-    <body class="background">
+    <body layout="row" class="background">
 
         <!--left menu-->
         <md-sidenav class="md-sidenav-left" md-component-id="left">
-
-            <div ng-controller="LeftMenuController">
-                <md-toolbar >
-                    <h5 class="md-toolbar-tools">
-                        <span>My App</span>
-                    </h5>
-                </md-toolbar>
-                <md-list>
-                    <md-list-item ng-click="navigateTo('dashboard')">
-                        <md-icon class="material-icons sm-icon-margin">poll</md-icon>
-                        <p>{{'DASHBOARD'|translate}}</p>
-                    </md-list-item>
-                    <md-divider></md-divider>
-                    <md-list-item ng-click="navigateTo('patient')">
-                        <md-icon class="material-icons sm-icon-margin" >people</md-icon>
-                        <p>{{'PATIENTS'|translate}}</p>
-                    </md-list-item>
-                    <md-divider></md-divider>
-                </md-list>
-            </div>
+            <md-toolbar class="md-tall md-hue-2">
+                <span flex></span>
+                <div layout="column" class="md-toolbar-tools-bottom inset">
+                    <img height="64" width="64" class="user-avatar" src="images/avatar.png"/>
+                    <span></span>
+                    <div>Firstname Lastname</div>
+                    <div>email@domainname.com</div>
+                </div>
+            </md-toolbar>
+            <md-list ng-controller="LeftMenuController">
+                <md-list-item ng-click="navigateTo('dashboard')">
+                    <div class="inset"><md-icon class="material-icons sm-icon-margin">dashboard</md-icon></div>
+                    <div class="inset">{{'DASHBOARD'|translate}}</div>
+                </md-list-item>
+                <md-list-item ng-click="navigateTo('patient')">
+                    <div class="inset"><md-icon class="material-icons sm-icon-margin">people</md-icon></div>
+                    <div class="inset">{{'PATIENTS'|translate}}</div>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-subheader>{{'MANAGEMENT'|translate}}</md-subheader>
+                <md-list-item ng-click="navigateTo('account')">
+                    <div class="inset"><md-icon md-menu-origin class="material-icons">perm_identity</md-icon></div>
+                    <div class="inset">{{'MY_ACCOUNT'|translate}}</div>
+                </md-list-item>
+                <md-list-item>
+                    <div class="inset"><md-icon md-menu-origin class="material-icons">exit_to_app</md-icon></div>
+                    <div class="inset">{{'SIGN_OUT'|translate}}</div>
+                </md-list-item>
+            </md-list>
         </md-sidenav>
 
-        <!-- top menu -->
-        <md-toolbar ng-controller="TopMenuController">
-            <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" ng-click="toggleLeftNav()">
-                    <md-icon class="material-icons">menu</md-icon>
-                </md-button>
-                <md-menu md-offset="0 40">
-                    <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
-                        <md-icon md-menu-origin class="material-icons">settings</md-icon>
-                    </md-button>
-                    <md-menu-content>
-                        <md-menu-item ng-click="navigateTo('account')">
-                            <md-button>
-                                <md-icon md-menu-origin class="material-icons">perm_identity</md-icon>
-                                {{'MY_ACCOUNT'|translate}}
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button>
-                                <md-icon md-menu-origin class="material-icons">exit_to_app</md-icon>
-                                {{'SIGN_OUT'|translate}}
-                            </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                </md-menu>
+        <div layout="column" class="relative" layout-fill role="main">
+            <div ng-controller="TopBarController">
+                <!-- top menu -->
+                <md-toolbar ng-show="!showSearch">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" ng-click="toggleLeftNav()">
+                            <md-icon class="material-icons">menu</md-icon>
+                        </md-button>
+                        <h3>
+                            {{context.title}}
+                        </h3>
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+                            <md-icon class="material-icons">search</md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <!-- search -->
+                <md-toolbar class="md-hue-1" ng-show="showSearch">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+                            <md-icon class="material-icons">arrow_back</md-icon>
+                        </md-button>
+                        <h3 class="pointer" ng-click="showSearch = !showSearch">
+                            {{'BACK'|translate}}
+                        </h3>
+                        <span>&nbsp;&nbsp;&nbsp;</span>
+                        <md-input-container md-theme="input" flex>
+                            <label>&nbsp;</label>
+                            <input type="search" ng-model="search" placeholder="{{'SEARCH'|translate}}">
+                        </md-input-container>
+                        <md-button class="md-icon-button" ng-click="search=''">
+                            <md-icon class="material-icons">close</md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
             </div>
-        </md-toolbar>
 
-        <!--dynamic content-->
-        <md-content>
-            <ng-view></ng-view>
-        </md-content>
+            <!--dynamic content-->
+            <md-content>
+                <ng-view></ng-view>
+            </md-content>
+
+        </div>
 
         <script src="js/main.js"></script>
 
