@@ -21,7 +21,7 @@
             <md-toolbar class="md-tall md-hue-2">
                 <span flex></span>
                 <div layout="column" class="md-toolbar-tools-bottom inset">
-                    <img height="64" width="64" class="user-avatar" src="images/avatar.png"/>
+                    <img class="user-avatar" src="images/avatar.png"/>
                     <span></span>
                     <div>Firstname Lastname</div>
                     <div>email@domainname.com</div>
@@ -78,7 +78,7 @@
                         <span>&nbsp;&nbsp;&nbsp;</span>
                         <md-input-container md-theme="input" flex>
                             <label>&nbsp;</label>
-                            <input type="search" ng-model="search" placeholder="{{'SEARCH'|translate}}">
+                            <input type="search" ng-model="search" ng-keypress="query()" placeholder="{{'SEARCH'|translate}}">
                         </md-input-container>
                         <md-button class="md-icon-button" ng-click="search=''">
                             <md-icon class="material-icons">close</md-icon>
