@@ -31,5 +31,9 @@
   TELEPHONE: 'Telephone',
   THIS_FIELD_IS_REQUIRED: 'This field is required',
   THIS_FIELD_MUST_BE_LESS_THAN: 'This field has to be less than {{size}} characters long',
-  SERVER_COMMUNICATION_ERROR: 'Ops, something went wrong in the server...'
+  SERVER_COMMUNICATION_ERROR: 'Ops, something went wrong in the server...',
+  NO_SEARCH_RESULT_FOUND: 'Your list is empty',
+  YOU_CAN_ADD_NEW_ENTITY_USING_BUTTON: 'You can add a new entry using the + button bellow.',
+  YOUR_LIST_IS_EMPTY: 'No result matching your criteria',
+  TRY_CHANGING_YOUR_QUERY: 'Try changing your query.'
 }

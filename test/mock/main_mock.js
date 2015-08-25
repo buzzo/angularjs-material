@@ -1,6 +1,7 @@
 'use strict';
 
 var RESPONSE_DELAY = 1000; // 1s
+var FILTER_PARAMETER = 'filter';
 
 var angular = require('angular');
 require('../../app/js/main.js'); // app
@@ -25,8 +26,15 @@ var id = 1000;
 
 angular.module('app-mock', requires).run(function ($httpBackend) {
 
-    $httpBackend.whenGET('/services/patients').respond(function () {
-        return [200, patients];
+    $httpBackend.whenGET(/^\/services\/patients/).respond(function (method, url) {
+        var params = _getParmsFromURL(url);
+        if (params && params[FILTER_PARAMETER]) {
+            // if there is a 'filter' param then use it as filter
+            return [200, _filter(patients, params[FILTER_PARAMETER])];
+        } else {
+            // no filter
+            return [200, patients];
+        }
     });
 
     $httpBackend.whenPOST('/services/patients').respond(function (method, url, data) {
@@ -117,3 +125,41 @@ angular.module('app-mock', requires).run(function ($httpBackend) {
         return proxy;
     });
 });
+
+// http://stackoverflow.com/questions/10624762/regex-to-extract-parameters-from-url-hash-in-javascript
+function _getParmsFromURL(url) {
+    var parms = {}, pieces, parts, i;
+    var hash = url.lastIndexOf("#");
+    if (hash !== -1) {
+        // remove hash value
+        url = url.slice(0, hash);
+    }
+    var question = url.lastIndexOf("?");
+    if (question !== -1) {
+        url = url.slice(question + 1);
+        pieces = url.split("&");
+        for (i = 0; i < pieces.length; i++) {
+            parts = pieces[i].split("=");
+            if (parts.length < 2) {
+                parts.push("");
+            }
+            parms[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+        }
+    }
+    return parms;
+}
+
+function _filter(entities, filter) {
+    if (!filter) {
+        // nothing to filter
+        return entities;
+    }
+    return entities.filter(function (entity) {
+        for (var key in entity) {
+            if (new String(entity[key]).toLowerCase().trim().indexOf(filter.toLowerCase().trim()) > -1) {
+                return true;
+            }
+        }
+        return false;
+    });
+}

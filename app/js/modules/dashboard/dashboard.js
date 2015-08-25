@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function ($scope, $translate, SharedContext) {
+module.exports = function ($scope, $rootScope, $translate, SharedContext) {
 
     $translate('DASHBOARD').then(function (translation) {
-        SharedContext.title = translation;
+        $rootScope.$broadcast('title', translation);
     });
 
     $scope.title = 'Dashboard';

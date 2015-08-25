@@ -58,7 +58,7 @@
                             <md-icon class="material-icons">menu</md-icon>
                         </md-button>
                         <h3>
-                            {{context.title}}
+                            {{title}}
                         </h3>
                         <span flex></span>
                         <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
@@ -69,18 +69,18 @@
                 <!-- search -->
                 <md-toolbar class="md-hue-1" ng-show="showSearch">
                     <div class="md-toolbar-tools">
-                        <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+                        <md-button class="md-icon-button" ng-click="search='';query();showSearch=!showSearch;">
                             <md-icon class="material-icons">arrow_back</md-icon>
                         </md-button>
-                        <h3 class="pointer" ng-click="showSearch = !showSearch">
+                        <h3 class="pointer" ng-click="search='';query();showSearch=!showSearch;">
                             {{'BACK'|translate}}
                         </h3>
                         <span>&nbsp;&nbsp;&nbsp;</span>
                         <md-input-container md-theme="input" flex>
                             <label>&nbsp;</label>
-                            <input type="search" ng-model="search" ng-keypress="query()" placeholder="{{'SEARCH'|translate}}">
+                            <input type="search" ng-model="search" ng-keyup="query()" placeholder="{{'SEARCH'|translate}}">
                         </md-input-container>
-                        <md-button class="md-icon-button" ng-click="search=''">
+                        <md-button class="md-icon-button" ng-click="search='';query();">
                             <md-icon class="material-icons">close</md-icon>
                         </md-button>
                     </div>

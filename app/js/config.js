@@ -6,17 +6,17 @@ module.exports = function ($routeProvider, $translateProvider, $mdThemingProvide
     // route
     $routeProvider
         .when('/dashboard', {
-            controller: ['$scope', '$translate', 'SharedContext', require('./modules/dashboard/dashboard.js')],
+            controller: ['$scope', '$rootScope', '$translate', require('./modules/dashboard/dashboard.js')],
             template: fs.readFileSync(__dirname + '/modules/dashboard/dashboard.html'),
             css: require('./modules/dashboard/dashboard.css')
         })
         .when('/patient', {
-            controller: ['$scope', '$mdDialog', '$mdToast', '$translate', 'SharedContext', 'Patient', require('./modules/patient/patient.js')],
+            controller: ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$translate', 'Patient', require('./modules/patient/patient.js')],
             template: fs.readFileSync(__dirname + '/modules/patient/patient.html'),
             css: require('./modules/patient/patient.css')
         })
         .when('/account', {
-            controller: ['$scope', '$translate', 'SharedContext', require('./modules/account/account.js')],
+            controller: ['$scope', '$rootScope', '$translate', require('./modules/account/account.js')],
             template: fs.readFileSync(__dirname + '/modules/account/account.html'),
             css: require('./modules/account/account.css')
         })

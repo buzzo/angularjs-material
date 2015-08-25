@@ -3,10 +3,10 @@
 var fs = require('fs');
 var angular = require('angular');
 
-module.exports = function ($scope, $mdDialog, $mdToast, $translate, SharedContext, Patient) {
+module.exports = function ($scope, $rootScope, $mdDialog, $mdToast, $translate, Patient) {
 
     $translate('PATIENTS').then(function (translation) {
-        SharedContext.title = translation;
+        $rootScope.$broadcast('title', translation);
     });
 
     _load();
@@ -18,6 +18,13 @@ module.exports = function ($scope, $mdDialog, $mdToast, $translate, SharedContex
     $scope.update = function (entity) {
         $scope.showDetails(entity, true);
     };
+
+    $scope.isFiltering = false;
+    // search word from search bar
+    $scope.$on('search', function (event, query) {
+        $scope.isFiltering = query ? true : false;
+        _load(query);
+    });
 
     $scope.showDetails = function (entity, isEntityUpdate) {
         var details = {
@@ -155,9 +162,14 @@ module.exports = function ($scope, $mdDialog, $mdToast, $translate, SharedContex
         }
     }
 
-    function _load() {
+    /**
+     * Load entity.
+     * @param filter optional filter
+     * @private
+     */
+    function _load(filter) {
         $scope.isLoading = true;
-        $scope.entities = Patient.query(function () {
+        $scope.entities = Patient.query({filter: filter}, function () {
             $scope.isLoading = false;
         }, function (error) {
             $scope.entities = {};

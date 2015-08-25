@@ -11,3 +11,20 @@
     bottom: 20px;
     right: 35px;
 }
+
+.message-icon {
+    width: 96px;
+    height: 96px;
+    font-size: 96px;
+}
+
+.message-header {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.message-text {
+    margin-top: 5px;
+    font-size: 14px;
+    font-color: #eee;
+}

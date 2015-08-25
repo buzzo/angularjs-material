@@ -31,5 +31,9 @@
   TELEPHONE: 'Telefone',
   THIS_FIELD_IS_REQUIRED: 'Este campo é obrigatório',
   THIS_FIELD_MUST_BE_LESS_THAN: 'Este campo deve conter menos de {{size}} caracteres',
-  SERVER_COMMUNICATION_ERROR: 'Ops, algo de errado aconteceu com o servidor...'
+  SERVER_COMMUNICATION_ERROR: 'Ops, algo de errado aconteceu com o servidor...',
+  NO_SEARCH_RESULT_FOUND: 'Sua lista esta vazia',
+  YOU_CAN_ADD_NEW_ENTITY_USING_BUTTON: 'Você pode adicionar um novo cadastro usando o botão + abaixo.',
+  YOUR_LIST_IS_EMPTY: 'Nenhum resultado encontrando',
+  TRY_CHANGING_YOUR_QUERY: 'Tente alterar sua filtragem.'
 }

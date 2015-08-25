@@ -6,6 +6,25 @@
                 <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 &nbsp;&nbsp;&nbsp;{{'LOADING'|translate}}...
             </div>
+            <!--filter message-->
+            <div class="loading-padding" layout="row" layout-sm="column" layout-align="center center"
+                 ng-show="isFiltering && !isLoading && !entities.length">
+                <div layout="column" layout-align="center center" class="inset">
+                    <md-icon class="material-icons message-icon">search</md-icon>
+                    <div class="message-header">{{'YOUR_LIST_IS_EMPTY'|translate}}</div>
+                    <div class="message-text">{{'TRY_CHANGING_YOUR_QUERY'|translate}}</div>
+                </div>
+            </div>
+            <!--empty message-->
+            <div class="loading-padding" layout="row" layout-sm="column" layout-align="center center"
+                 ng-show="!isFiltering && !isLoading && !entities.length">
+                <div layout="column" layout-align="center center" class="inset">
+                    <md-icon class="material-icons message-icon">filter_drama</md-icon>
+                    <div class="message-header">{{'NO_SEARCH_RESULT_FOUND'|translate:'{entity:PATIENT}'}}</div>
+                    <div class="message-text">{{'YOU_CAN_ADD_NEW_ENTITY_USING_BUTTON'|translate:'{entity:PATIENT}'}}</div>
+                </div>
+            </div>
+            <!--list-->
             <md-list ng-show="!isLoading">
                 <md-list-item class="md-3-line" ng-repeat="entity in entities" ng-click="update(entity)">
                     <div class="md-list-item-text">

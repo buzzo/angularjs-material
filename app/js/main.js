@@ -22,7 +22,6 @@ var app = angular
     .config(['$routeProvider', '$translateProvider', '$mdThemingProvider', require('./config')]);
 
 // services
-require('./common/shared.context.js'); // SharedContext
 require('./modules/patient/patient.service.js'); // Patient
 
 // directives

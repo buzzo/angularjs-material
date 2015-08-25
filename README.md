@@ -11,12 +11,11 @@ Goal:
 
 TODO:
 
-- implement list search
 - (bug) left sidenav is not sliding (just showing up)
-- implement virtual scrolling
 - improve dashboard example
 - improve account example
 - create a change language
+- implement virtual scrolling
 - implement UNDO for operations
 - implement server side validation errors (like unique name for patient)
 - how handle input form with spaces only?
