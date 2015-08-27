@@ -11,10 +11,13 @@ Goal:
 
 TODO:
 
-- (bug) left sidenav is not sliding (just showing up)
+- remove search icon from dashboard and account
+- make transition from top bar to search bar smooth
 - improve dashboard example
 - improve account example
 - create a change language
+- update material.scss to 0.10.1
+- use angular-material.scss from source (from npm)
 - implement virtual scrolling
 - implement UNDO for operations
 - implement server side validation errors (like unique name for patient)
@@ -22,7 +25,6 @@ TODO:
 - show message when list is empty
 - show message (inside list div) or picture when get an error to load list
 - improve tests (they are just examples today)
-- use angular-material.scss from source (from npm)
 - improve login screen
 - research + add security (login, logout)
 
