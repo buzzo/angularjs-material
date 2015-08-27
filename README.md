@@ -11,7 +11,6 @@ Goal:
 
 TODO:
 
-- remove search icon from dashboard and account
 - make transition from top bar to search bar smooth
 - improve dashboard example
 - improve account example

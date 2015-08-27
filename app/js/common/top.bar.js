@@ -15,6 +15,13 @@ module.exports = app.controller('TopBarController', ['$scope', '$rootScope', '$l
             $scope.title = data;
         });
 
+        // receives a signal from content region if search is allowed
+        // by default it is disabled
+        $scope.allowSearch = false;
+        $scope.$on('allowSearch', function (event, data) {
+            $scope.allowSearch = data;
+        });
+
         // sends the search word down to relevant region
         $scope.query = function () {
             $rootScope.$broadcast('search', $scope.search);

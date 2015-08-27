@@ -28,5 +28,5 @@ require('./modules/patient/patient.service.js'); // Patient
 require('./common/converter.date.js');
 
 // index.html controllers
-require('./common/menu.left.js');
+require('./common/left.menu.js');
 require('./common/top.bar.js');

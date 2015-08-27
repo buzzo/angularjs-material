@@ -5,8 +5,10 @@ var angular = require('angular');
 
 module.exports = function ($scope, $rootScope, $mdDialog, $mdToast, $translate, Patient) {
 
+    // init top bar
     $translate('PATIENTS').then(function (translation) {
         $rootScope.$broadcast('title', translation);
+        $rootScope.$broadcast('allowSearch', true);
     });
 
     _load();
