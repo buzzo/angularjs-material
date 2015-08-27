@@ -12,11 +12,11 @@ Goal:
 TODO:
 
 - make transition from top bar to search bar smooth
-- improve dashboard example
 - improve account example
 - create a change language
 - update material.scss to 0.10.1
 - use angular-material.scss from source (from npm)
+- fix tests
 - implement virtual scrolling
 - implement UNDO for operations
 - implement server side validation errors (like unique name for patient)

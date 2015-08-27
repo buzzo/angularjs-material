@@ -1,6 +1,20 @@
-<h1 class="dashboard-header">{{title}}</h1>
-<p> You are on home</p>
-
-<md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-    Checkbox 1: {{ data.cb1 }}
-</md-checkbox>
+<div class="layout-padding">
+    <md-grid-list md-cols-sm="1" md-cols-gt-md="2" md-row-height-gt-md="1:1"
+                  md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+        <md-grid-tile class="green">
+            <md-grid-tile-footer>
+                <h3>{{'DASHBOARD'|translate}} #1</h3>
+            </md-grid-tile-footer>
+        </md-grid-tile>
+        <md-grid-tile class="yellow">
+            <md-grid-tile-footer>
+                <h3>{{'DASHBOARD'|translate}} #2</h3>
+            </md-grid-tile-footer>
+        </md-grid-tile>
+        <md-grid-tile class="red" md-rowspan="1" md-colspan="2" md-colspan-sm="1">
+            <md-grid-tile-footer>
+                <h3>{{'DASHBOARD'|translate}} #3</h3>
+            </md-grid-tile-footer>
+        </md-grid-tile>
+    </md-grid-list>
+</div>

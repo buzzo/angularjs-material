@@ -1,3 +1,15 @@
-.dashboard-header {
-    color: blue;
+.green {
+    background: #b9f6ca;
+}
+
+.yellow {
+    background: #ffff8d;
+}
+
+.red {
+    background: #ff8a80;
+}
+
+md-grid-tile {
+    transition: all 400ms ease-out 50ms;
 }

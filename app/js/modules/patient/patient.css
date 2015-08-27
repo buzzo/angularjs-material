@@ -2,10 +2,6 @@
     padding: 10px 0;
 }
 
-.layout-padding {
-    padding: 10px 50px;
-}
-
 .fixed-bottom {
     position: fixed;
     bottom: 20px;

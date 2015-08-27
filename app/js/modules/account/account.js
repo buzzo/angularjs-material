@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function ($scope, $rootScope, $translate, SharedContext) {
+module.exports = function ($scope, $rootScope, $translate) {
 
     // init top bar
     $translate('MY_ACCOUNT').then(function (translation) {
