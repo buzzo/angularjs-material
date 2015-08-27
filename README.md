@@ -11,7 +11,6 @@ Goal:
 
 TODO:
 
-- make transition from top bar to search bar smooth
 - improve account example
 - create a change language
 - update material.scss to 0.10.1

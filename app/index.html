@@ -21,7 +21,7 @@
             <md-toolbar class="md-tall md-hue-2">
                 <span flex></span>
                 <div layout="column" class="md-toolbar-tools-bottom inset">
-                    <img class="user-avatar" src="images/avatar.png"/>
+                    <img class="fab-avatar" src="images/avatar.png"/>
                     <span></span>
                     <div>Firstname Lastname</div>
                     <div>email@domainname.com</div>
@@ -52,7 +52,7 @@
         <div layout="column" class="relative" layout-fill role="main">
             <div ng-controller="TopBarController">
                 <!-- top menu -->
-                <md-toolbar ng-show="!showSearch">
+                <md-toolbar class="bar-show-hide" ng-show="!showSearch">
                     <div class="md-toolbar-tools">
                         <md-button class="md-icon-button" ng-click="toggleLeftNav()">
                             <md-icon class="material-icons">menu</md-icon>
@@ -67,7 +67,7 @@
                     </div>
                 </md-toolbar>
                 <!-- search -->
-                <md-toolbar class="md-hue-1" ng-show="showSearch">
+                <md-toolbar class="bar-show-hide md-hue-1" ng-show="showSearch">
                     <div class="md-toolbar-tools">
                         <md-button class="md-icon-button" ng-click="search='';query();showSearch=!showSearch;">
                             <md-icon class="material-icons">arrow_back</md-icon>
