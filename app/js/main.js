@@ -27,8 +27,8 @@ require('./common/system.config.js'); // SystemConfig
 require('./common/converter.date.js');
 
 // index.html controllers
-require('./common/left.menu.js');
-require('./common/top.bar.js');
+require('./modules/navigation/left.menu.js');
+require('./modules/navigation/top.bar.js');
 
 // configuration
 app.config(['$routeProvider', '$translateProvider', '$mdThemingProvider', 'SystemConfigProvider', require('./config')]);
