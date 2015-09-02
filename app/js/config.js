@@ -2,8 +2,7 @@
 
 var fs = require('fs');
 
-module.exports = function ($routeProvider, $translateProvider, $mdThemingProvider) {
-
+module.exports = function ($routeProvider, $translateProvider, $mdThemingProvider, SystemConfigProvider) {
     // route
     $routeProvider
         .when('/dashboard', {
@@ -17,7 +16,7 @@ module.exports = function ($routeProvider, $translateProvider, $mdThemingProvide
             css: require('./modules/patient/patient.css')
         })
         .when('/account', {
-            controller: ['$scope', '$rootScope', '$translate', require('./modules/account/account.js')],
+            controller: ['$scope', '$rootScope', '$mdDialog', '$translate', require('./modules/account/account.js')],
             template: fs.readFileSync(__dirname + '/modules/account/account.html', 'utf-8'),
             css: require('./modules/account/account.css')
         })
@@ -25,9 +24,11 @@ module.exports = function ($routeProvider, $translateProvider, $mdThemingProvide
             redirectTo: '/dashboard'
         });
     // i18n
-    $translateProvider.translations('en-us', require('./locales/en-us.json'));
-    $translateProvider.translations('pt-br', require('./locales/pt-br.json'));
-    $translateProvider.preferredLanguage('pt-br');
+    var languages = SystemConfigProvider.$get().languages;
+    languages.available.forEach(function (language) {
+        $translateProvider.translations(language.locale, language.content);
+    });
+    $translateProvider.preferredLanguage(languages.preferred);
     // theme
     var customBlueMap = $mdThemingProvider.extendPalette('light-blue', {
         'contrastDefaultColor': 'light',

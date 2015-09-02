@@ -44,8 +44,12 @@ $icon-size: 56px;
 // --------------------------------------------------------------------------------------------
 // settings for content region
 
-.layout-padding {
+.sm-layout-padding {
   padding: 10px 50px;
+}
+
+.gt-layout-padding {
+  padding: 10px 250px;
 }
 
 .background {

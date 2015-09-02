@@ -1,6 +1,48 @@
-<div class="col-md-12 main">
+<div class="gt-layout-padding">
 
-    <h2>{{title}}</h2>
-    <h1 class="account-title">{{title}}</h1>
+    <md-card flex-gt-sm="90" flex-gt-md="80">
+        <md-card-content>
+            <h2 class="md-title">{{'PASSWORD'|translate}}</h2>
+
+            <p>
+                {{'PASSWORD_CHANGE_TIP'|translate}}
+            </p>
+
+            <p>
+                {{'LAST_PASSWORD_CHANGE_TIME'|translate:lastChange}}
+            </p>
+
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-list class="no-padding">
+            <md-list-item ng-click="changePassword()">
+                <div class="inset">{{'CHANGE_PASSWORD'|translate}}</div>
+                <span flex></span>
+                <md-icon md-menu-origin class="material-icons">keyboard_arrow_right</md-icon>
+            </md-list-item>
+        </md-list>
+    </md-card>
+
+    <md-card flex-gt-sm="90" flex-gt-md="80">
+        <md-card-content>
+            <h2 class="md-title">{{'LANGUAGE'|translate}}</h2>
+
+            <p>
+                {{'LANGUAGE_CHANGE_TIP'|translate}}
+            </p>
+
+            <p>
+                {{'CURRENT_LANGUAGE'|translate:currentLanguage}}
+            </p>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-list class="no-padding">
+            <md-list-item ng-click="changeLanguage()">
+                <div class="inset">{{'CHANGE_LANGUAGE'|translate}}</div>
+                <span flex></span>
+                <md-icon md-menu-origin class="material-icons">keyboard_arrow_right</md-icon>
+            </md-list-item>
+        </md-list>
+    </md-card>
 
 </div>

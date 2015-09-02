@@ -17,12 +17,11 @@ var requires = [
     'pascalprecht.translate'
 ];
 
-var app = angular
-    .module('app', requires)
-    .config(['$routeProvider', '$translateProvider', '$mdThemingProvider', require('./config')]);
+var app = angular.module('app', requires);
 
 // services
 require('./modules/patient/patient.service.js'); // Patient
+require('./common/system.config.js'); // SystemConfig
 
 // directives
 require('./common/converter.date.js');
@@ -30,3 +29,6 @@ require('./common/converter.date.js');
 // index.html controllers
 require('./common/left.menu.js');
 require('./common/top.bar.js');
+
+// configuration
+app.config(['$routeProvider', '$translateProvider', '$mdThemingProvider', 'SystemConfigProvider', require('./config')]);

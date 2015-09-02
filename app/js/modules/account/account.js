@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = function ($scope, $rootScope, $translate) {
+var fs = require('fs');
+
+module.exports = function ($scope, $rootScope, $mdDialog, $translate) {
 
     // init top bar
     $translate('MY_ACCOUNT').then(function (translation) {
@@ -8,25 +10,48 @@ module.exports = function ($scope, $rootScope, $translate) {
         $rootScope.$broadcast('allowSearch', false);
     });
 
-    $scope.title = 'Account';
+    // TODO: TBD
+    $translate('NEVER').then(function (translation) {
+        $scope.lastChange = {time: translation};
+    });
 
-    var columnDefs = [
-        {headerName: "Make", field: "make"},
-        {headerName: "Model", field: "model"},
-        {headerName: "Price", field: "price"}
-    ];
+    // TODO: TBD
+    $scope.currentLanguage = {language: '???'};
 
-    var rowData = [
-        {make: "Toyota", model: "Celica", price: 35000},
-        {make: "Ford", model: "Mondeo", price: 32000},
-        {make: "Porsche", model: "Boxter", price: 72000}
-    ];
+    $scope.changeLanguage = function () {
+        var language = {
+            template: fs.readFileSync(__dirname + '/account.language.html'),
+            controller: LanguageDialogController
+        };
 
-    $scope.gridOptions = {
-        columnDefs: columnDefs,
-        rowData: rowData,
-        dontUseScrolls: true // because so little data, no need to use scroll bars
+        $mdDialog.show(language)
+            .then(function (result) {
+                // all outputs
+                if (result) {
+                    // TODO: TBD
+                }
+            }, function () {
+                // 'esc' pressed
+                // TODO: TBD
+            }).finally(function () {
+                // clean up
+                language = undefined;
+            });
+    }
+
+    function LanguageDialogController($scope, $mdDialog) {
+        $scope.cancel = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.save = function () {
+            $mdDialog.hide();
+        };
     };
+
+    $scope.changePassword = function () {
+        // TODO: TBD
+    }
 
 
 };
