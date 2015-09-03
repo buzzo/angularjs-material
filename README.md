@@ -11,18 +11,14 @@ Goal:
 
 TODO:
 
-- update material.scss to 0.10.1
-- use angular-material.scss from source (from npm)
 - implement virtual scrolling
-- fix tests
 - implement UNDO for operations
 - implement change language (needs user session and server side)
 - implement change password (needs user session and server side)
 - implement server side validation errors (like unique name for patient)
 - how handle input form with spaces only?
-- show message when list is empty
 - show message (inside list div) or picture when get an error to load list
-- improve tests (they are just examples today)
+- fix and improve tests (they are just examples today)
 - improve login screen
 - research + add security (login, logout)
 
