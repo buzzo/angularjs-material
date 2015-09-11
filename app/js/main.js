@@ -17,7 +17,7 @@ var requires = [
     'pascalprecht.translate'
 ];
 
-var app = angular.module('app', requires);
+window.app = angular.module('app', requires);
 
 // services
 require('./modules/patient/patient.service.js'); // Patient
@@ -31,4 +31,4 @@ require('./modules/navigation/left.menu.js');
 require('./modules/navigation/top.bar.js');
 
 // configuration
-app.config(['$routeProvider', '$translateProvider', '$mdThemingProvider', 'SystemConfigProvider', require('./config')]);
+angular.module('app').config(['$routeProvider', '$translateProvider', '$mdThemingProvider', 'SystemConfigProvider', require('./config')]);
