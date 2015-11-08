@@ -33,3 +33,21 @@ gulp test (run unit and e2e tests with coverage report)
 npm run test (run unit test and keeps watching for changes. Great for development. No coverage report)
 npm run protractor (run e2e test only. No coverage report)
 ```
+
+### Troubleshooting
+
+Error:
+```
+➜  angularjs-material git:(master) gulp dev
+/home/cristofer/projects/angularjs-material/node_modules/gulp-sass/node_modules/node-sass/lib/index.js:22
+    throw new Error('`libsass` bindings not found. Try reinstalling `node-sass`?');
+    ^
+
+Error: `libsass` bindings not found. Try reinstalling `node-sass`?
+```
+
+Solution:
+```
+npm install node-sass
+npm install gulp-sass
+```
